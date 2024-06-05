@@ -2,7 +2,7 @@ import './Header.css';
 
 export function Header() {
   return (
-    <section>
+    <header>
       <div className="header-container">
         <h3>Diego Balderrama</h3>
         <nav>
@@ -14,6 +14,6 @@ export function Header() {
       <div className="title">
         THE BLOG
       </div>
-    </section>
+    </header>
   );
 }
