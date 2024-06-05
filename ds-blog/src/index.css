@@ -9,3 +9,13 @@
   font-family: 'Inter';
   font-style: normal;
 }
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
