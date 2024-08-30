@@ -13,6 +13,7 @@
 :root {
   --bg-color: #ffffff;
   --text-color: #1a1a1a;
+  --mode-btn-bg: #090D1F;
 }
 
 body {

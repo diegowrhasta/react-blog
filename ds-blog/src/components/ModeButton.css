@@ -1,0 +1,21 @@
+button {
+  width: 96px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  border-radius: 29px;
+  background: var(--mode-btn-bg);
+  cursor: pointer;
+
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:focus-out {
+    transform: scale(1);
+  }
+}
