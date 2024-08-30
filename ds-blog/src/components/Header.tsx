@@ -8,6 +8,7 @@ export function Header() {
         <nav>
           <a href="#recent">Recent</a>
           <a href="#all">All</a>
+          <a href="#about">About</a>
           <a href="#">Mode</a>
         </nav>
       </div>
