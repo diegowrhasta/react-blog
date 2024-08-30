@@ -31,15 +31,15 @@ header {
         }
 
         &:hover {
-          border-bottom: 2px solid #000;
+          border-bottom: var(--border-color);
         }
       }
     }
   }
 
   div.title {
-    border-top: 1px solid rgba(0, 0, 0, 0.34);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.34);
+    border-top: var(--title-border-color);
+    border-bottom: var(--title-border-color);
     font-weight: 700;
     font-size: 244px;
     text-align: center;
