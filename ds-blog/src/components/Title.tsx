@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { Subject, takeUntil, tap } from 'rxjs'
 
 import { titleStore } from '../store'
+import * as observableUtils from '../utils/observables'
 
 import './Title.css'
-import * as observableUtils from '../utils/observables'
 
 export function Title () {
   const [titleText, setTitleText] = useState(titleStore.getValue().title)
