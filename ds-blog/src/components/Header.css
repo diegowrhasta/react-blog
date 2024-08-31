@@ -36,12 +36,4 @@ header {
       }
     }
   }
-
-  div.title {
-    border-top: var(--title-border-color);
-    border-bottom: var(--title-border-color);
-    font-weight: 700;
-    font-size: 244px;
-    text-align: center;
-  }
 }

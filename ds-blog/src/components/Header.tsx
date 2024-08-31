@@ -24,7 +24,6 @@ export function Header ({ onModeButtonClick }: HeaderProps) {
           <ModeButton onClick={onModeClick} />
         </nav>
       </div>
-      <div className='title'>THE BLOG</div>
     </header>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Header } from './components/Header'
+import { Title } from './components/Title'
 
 import './App.css'
 
@@ -13,6 +14,7 @@ function App () {
     <>
       <div className='container'>
         <Header onModeButtonClick={onChangeMode}></Header>
+        <Title title='THE BLOG'></Title>
         <main>MAIN</main>
         <footer>FOOTER</footer>
       </div>
