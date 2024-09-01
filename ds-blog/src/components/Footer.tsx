@@ -1,6 +1,6 @@
 import './Footer.css'
 
-const links = {
+const LINKS = {
   linkedIn: 'https://www.linkedin.com/in/ds-balderrama/',
   email: 'mailto:balderrama.quino.diego@gmail.com'
 }
@@ -14,8 +14,8 @@ export function Footer () {
     <div className='links'>
       <ul>
         <li className='static'>© 2024</li>
-        <li onClick={() => onLinkClick(links.linkedIn)}>LinkedIn</li>
-        <li onClick={() => onLinkClick(links.email)}>Email</li>
+        <li onClick={() => onLinkClick(LINKS.linkedIn)}>LinkedIn</li>
+        <li onClick={() => onLinkClick(LINKS.email)}>Email</li>
       </ul>
     </div>
   )
