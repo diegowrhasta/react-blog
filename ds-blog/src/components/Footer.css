@@ -4,11 +4,15 @@ div.links {
     display: flex;
     gap: 15px;
 
-    li:not(.static) {
-      cursor: pointer;
+    li {
+      font-size: 20px;
 
-      &:hover {
-        border-bottom: var(--border-color);
+      &:not(.static) {
+        cursor: pointer;
+
+        &:hover {
+          border-bottom: var(--border-color);
+        }
       }
     }
   }
