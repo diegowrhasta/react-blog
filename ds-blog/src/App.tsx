@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 
 import { Header } from './components/Header'
 import { Title } from './components/Title'
+import { Footer } from './components/Footer'
 
 import './App.css'
 import { updateTitle } from './store'
@@ -23,7 +24,9 @@ function App () {
         <Header onModeButtonClick={onChangeMode}></Header>
         <Title></Title>
         <main>MAIN</main>
-        <footer>FOOTER</footer>
+        <footer>
+          <Footer></Footer>
+        </footer>
       </div>
     </>
   )

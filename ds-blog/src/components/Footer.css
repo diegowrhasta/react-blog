@@ -1,0 +1,15 @@
+div.links {
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+
+    li:not(.static) {
+      cursor: pointer;
+
+      &:hover {
+        border-bottom: var(--border-color);
+      }
+    }
+  }
+}
