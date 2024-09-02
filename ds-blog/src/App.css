@@ -4,4 +4,10 @@ div.container {
     padding-top: 72px;
     padding-bottom: 72px;
   }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
 }

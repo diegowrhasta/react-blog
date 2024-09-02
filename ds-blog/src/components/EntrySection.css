@@ -1,0 +1,14 @@
+span.title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+div {
+  &.all-container {
+    display: table;
+  }
+
+  &.recent-container {
+    display: table;
+  }
+}
