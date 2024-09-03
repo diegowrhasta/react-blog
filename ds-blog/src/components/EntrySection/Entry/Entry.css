@@ -1,0 +1,22 @@
+div.entry {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  label.main-details {
+    color: #6941c6;
+    font-weight: 600;
+    font-size: 14pxk;
+  }
+
+  span.title {
+    font-weight: 600;
+    font-size: 24px;
+  }
+
+  div.text-preview {
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--light-text);
+  }
+}

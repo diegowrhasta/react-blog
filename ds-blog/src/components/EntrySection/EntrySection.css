@@ -1,0 +1,22 @@
+span.title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+div {
+  &.entry-container {
+    &.all-container {
+      display: table;
+    }
+
+    &.recent-container {
+      display: table;
+
+      div:last-child() {
+      }
+
+      div:first-child {
+      }
+    }
+  }
+}
