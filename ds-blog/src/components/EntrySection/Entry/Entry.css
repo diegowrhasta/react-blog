@@ -19,4 +19,10 @@ div.entry {
     font-size: 16px;
     color: var(--light-text);
   }
+
+  span.labels {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
 }

@@ -1,0 +1,29 @@
+div.tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 16px;
+  padding: 4px 10px;
+
+  &.purple {
+    background: #f9f5ff;
+    color: #6941c6;
+  }
+
+  &.blue {
+    background: #eef4ff;
+    color: #3538cd;
+  }
+
+  &.red {
+    background: #fdf2fa;
+    color: #c11574;
+  }
+
+  &.green {
+    background: #ecfdf3;
+    color: #027a48;
+  }
+}

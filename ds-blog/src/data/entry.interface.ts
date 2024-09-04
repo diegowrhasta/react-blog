@@ -1,6 +1,7 @@
 export interface LabelInterface {
+  id: string
   label: string
-  type: 'PURPLE' | 'BLUE' | 'RED'
+  type: 'PURPLE' | 'BLUE' | 'RED' | 'GREEN'
 }
 
 export interface EntryInterface {

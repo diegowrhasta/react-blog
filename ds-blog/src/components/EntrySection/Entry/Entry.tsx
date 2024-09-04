@@ -1,9 +1,10 @@
+import { Tag } from './Tag/Tag'
+
 import { EntryInterface } from '../../../data'
 import * as dateUtils from '../../../utils/date'
 import './Entry.css'
 
-interface EntryProps extends EntryInterface {
-}
+interface EntryProps extends EntryInterface {}
 
 export function Entry ({
   id,
@@ -13,6 +14,10 @@ export function Entry ({
   previewText,
   labels
 }: EntryProps) {
+  const tags = labels.map(entry => {
+    return <Tag label={entry} />
+  })
+
   return (
     <div key={id} className='entry'>
       <img
@@ -24,7 +29,7 @@ export function Entry ({
       )}`}</label>
       <span className='title'>{title}</span>
       <div className='text-preview'>{previewText}</div>
-      <span className='labels'></span>
+      <span className='labels'>{tags}</span>
     </div>
   )
 }
