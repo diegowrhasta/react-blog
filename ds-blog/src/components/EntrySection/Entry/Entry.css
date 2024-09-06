@@ -25,4 +25,44 @@ div.entry {
     flex-direction: row;
     gap: 8px;
   }
+
+  &.medium-picture-top {
+    img {
+      max-height: 228px;
+    }
+  }
+
+  &.small-picture-left {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+
+    img {
+      max-height: 200px;
+    }
+
+    section.text {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+  }
+
+  &.medium-picture-left {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+
+    img {
+      flex: 1 1 50%;
+      max-height: 246px;
+    }
+
+    section.text {
+      flex: 1 1 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+  }
 }
