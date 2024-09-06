@@ -3,15 +3,19 @@ span.title {
   font-weight: 600;
 }
 
-div {
-  &.entry-container {
+div.entry-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  
+  div.entry-container {
     &.all-container {
     }
 
     &.recent-container {
       display: flex;
       flex-direction: column;
-      gap: 64px;
+      gap: 56px;
 
       div.first-row {
         flex: 1;

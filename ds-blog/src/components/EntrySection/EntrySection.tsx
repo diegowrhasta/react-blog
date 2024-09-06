@@ -28,27 +28,25 @@ export function EntrySection ({
   }
 
   return (
-    <>
+    <div className='entry-section-container'>
       <span className='title'>{titleName}</span>
       {container}
-    </>
+    </div>
   )
 }
 
 function getRecentLayout (entries: EntryInterface[]) {
   return (
-    <div>
-      <div className='entry-container recent-container'>
-        <div className='first-row'>
-          <Entry type={getRecentEntryType(0)} {...entries[0]} />
-          <div className='stacked-entries'>
-            <Entry type={getRecentEntryType(1)} {...entries[1]} />
-            <Entry type={getRecentEntryType(2)} {...entries[2]} />
-          </div>
+    <div className='entry-container recent-container'>
+      <div className='first-row'>
+        <Entry type={getRecentEntryType(0)} {...entries[0]} />
+        <div className='stacked-entries'>
+          <Entry type={getRecentEntryType(1)} {...entries[1]} />
+          <Entry type={getRecentEntryType(2)} {...entries[2]} />
         </div>
-        <div className='last-item'>
-          <Entry type={getRecentEntryType(3)} {...entries[3]} />
-        </div>
+      </div>
+      <div className='last-item'>
+        <Entry type={getRecentEntryType(3)} {...entries[3]} />
       </div>
     </div>
   )
