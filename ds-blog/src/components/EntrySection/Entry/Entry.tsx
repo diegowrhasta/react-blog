@@ -6,7 +6,7 @@ import './Entry.css'
 import { ENTRY_TYPES } from '../../../constants'
 
 interface EntryProps extends EntryInterface {
-  type: EntryTypes
+  type?: EntryTypes | undefined
 }
 
 type EntryTypes = typeof ENTRY_TYPES[keyof typeof ENTRY_TYPES]
@@ -92,7 +92,7 @@ function getEntryType (
       )
     default:
       return (
-        <div key={id} className='entry'>
+        <div key={id} className='entry small-picture-top'>
           <img
             src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
             alt='desktop'

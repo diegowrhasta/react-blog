@@ -22,10 +22,7 @@ export function EntrySection ({
   //   return <Entry {...entry} />
   // })
 
-  let container = <></>
-  if (!allType) {
-    container = getRecentLayout(data)
-  }
+  const container = allType ? getAllLayout(data) : getRecentLayout(data)
 
   return (
     <div className='entry-section-container'>
@@ -33,6 +30,14 @@ export function EntrySection ({
       {container}
     </div>
   )
+}
+
+function getAllLayout (entries: EntryInterface[]) {
+  const genericEntries = entries.map(entry => {
+    return <Entry {...entry} />
+  })
+
+  return <div className='entry-container all-container'>{genericEntries}</div>
 }
 
 function getRecentLayout (entries: EntryInterface[]) {
