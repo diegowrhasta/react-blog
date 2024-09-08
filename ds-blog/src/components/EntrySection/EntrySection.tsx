@@ -1,5 +1,5 @@
 import { Entry } from './Entry/Entry'
-import { Paginator } from '../Paginator'
+import { Paginator } from './Paginator/Paginator'
 
 import { EntryInterface } from '../../data'
 import './EntrySection.css'

@@ -3,6 +3,8 @@ div.paginator-container {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  border-top: var(--paginator-border-color);
+  padding-top: 21px;
 
   span.page-section,
   span.paginator-section {
