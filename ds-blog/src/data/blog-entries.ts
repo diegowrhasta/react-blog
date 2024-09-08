@@ -1,6 +1,8 @@
+import { faker } from '@faker-js/faker'
+
 import { EntryInterface, LabelInterface } from './entry.interface'
 
-export const LABEL_ENTRIES: Record<string, LabelInterface> = {
+const LABEL_ENTRIES: Record<string, LabelInterface> = {
   'label-1': {
     id: 'label-1',
     label: 'Design',
@@ -21,9 +23,9 @@ export const LABEL_ENTRIES: Record<string, LabelInterface> = {
     label: 'Philosophy',
     type: 'GREEN'
   }
-}
+} as const
 
-export const ENTRY_DATA: Array<EntryInterface> = [
+const ENTRY_DATA: Array<EntryInterface> = [
   {
     id: 'blog-1',
     author: 'Olivia Rhye',
@@ -69,4 +71,37 @@ export const ENTRY_DATA: Array<EntryInterface> = [
     text: 'How do you create compelling presentations that wow your colleagues and impress your managers?',
     title: 'UX review presentations'
   }
-]
+] as const
+
+let _mockData: EntryInterface[] | undefined = undefined
+
+function getMockData () {
+  if (!_mockData) {
+    generateMockData()
+  }
+
+  return _mockData
+}
+
+function createRandomEntry (): EntryInterface {
+  return {
+    id: faker.string.uuid(),
+    author: faker.person.fullName(),
+    date: faker.date.recent(),
+    labels: faker.helpers.arrayElements(Object.values(LABEL_ENTRIES)),
+    previewText: faker.lorem.words(10),
+    text: faker.lorem.paragraphs(3),
+    title: faker.lorem.words(3)
+  }
+}
+
+function generateMockData () {
+  _mockData = []
+  const randomLength = Math.floor(Math.random() * 15) + 5
+
+  for (let i = 0; i < randomLength; i++) {
+    _mockData.push(createRandomEntry())
+  }
+}
+
+export { getMockData, LABEL_ENTRIES, ENTRY_DATA }

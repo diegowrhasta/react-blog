@@ -7,14 +7,15 @@ import { EntrySection } from './components/EntrySection/EntrySection'
 
 import './App.css'
 import * as entriesUtils from './utils/entries'
-import { ENTRY_DATA } from './data/blog-entries'
+import { getMockData } from './data/blog-entries'
 import { updateTitle } from './store'
 
 const defaultTitle = 'THE BLOG'
 
 function App () {
+  const [mockData] = useState(getMockData()!)
   const [recentEntries] = useState(
-    entriesUtils.calculateRecentEntries(ENTRY_DATA)
+    entriesUtils.calculateRecentEntries(mockData)
   )
 
   useEffect(() => {
@@ -35,7 +36,7 @@ function App () {
           titleName='Recent blog posts'
         ></EntrySection>
         <EntrySection
-          data={ENTRY_DATA}
+          data={mockData}
           titleName='All blog posts'
           isAllType
         ></EntrySection>
