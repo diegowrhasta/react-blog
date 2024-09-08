@@ -12,7 +12,7 @@ export function ModeButton ({ onClick }: ModeButtonProps) {
   }
 
   return (
-    <button onClick={onModeChange}>
+    <button className='mode-button' onClick={onModeChange}>
       <svg
         width='24'
         height='24'

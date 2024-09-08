@@ -1,4 +1,5 @@
 import { Entry } from './Entry/Entry'
+import { Paginator } from '../Paginator'
 
 import { EntryInterface } from '../../data'
 import './EntrySection.css'
@@ -28,6 +29,7 @@ export function EntrySection ({
     <div className='entry-section-container'>
       <span className='title'>{titleName}</span>
       {container}
+      <Paginator />
     </div>
   )
 }
