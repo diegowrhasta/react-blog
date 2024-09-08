@@ -29,7 +29,7 @@ export function EntrySection ({
     <div className='entry-section-container'>
       <span className='title'>{titleName}</span>
       {container}
-      <Paginator />
+      {allType && <Paginator />}
     </div>
   )
 }
