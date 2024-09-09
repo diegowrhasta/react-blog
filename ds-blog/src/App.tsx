@@ -37,6 +37,8 @@ function App () {
         ></EntrySection>
         <EntrySection
           data={mockData}
+          pageNumber={entriesUtils.getPageNumber(mockData.length)}
+          pageSize={entriesUtils.PAGINATOR_CONFIG.pageSize}
           titleName='All blog posts'
           isAllType
         ></EntrySection>

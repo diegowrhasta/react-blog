@@ -39,4 +39,30 @@ div.paginator-container {
       }
     }
   }
+
+  span.paginator-section {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    div.page-button {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      min-height: 40px;
+      border-radius: 8px;
+      color: var(--light-text);
+
+      &.selected {
+        background: #f9f5ff;
+        color: #7f56d9;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }

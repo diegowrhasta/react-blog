@@ -12,8 +12,8 @@ interface EntryProps extends EntryInterface {
 type EntryTypes = typeof ENTRY_TYPES[keyof typeof ENTRY_TYPES]
 
 function Entry (props: EntryProps) {
-  const tags = props.labels.map(entry => {
-    return <Tag label={entry} />
+  const tags = props.labels.map((entry, index) => {
+    return <Tag key={`${index}-tag`} label={entry} />
   })
 
   const entry = getEntryType(props, tags)

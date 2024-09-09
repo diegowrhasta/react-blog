@@ -8,20 +8,19 @@ import { ENTRY_TYPES } from '../../constants'
 interface EntrySectionProps {
   titleName: string | undefined
   isAllType?: boolean
+  pageNumber?: number
+  pageSize?: number
   data: EntryInterface[]
 }
 
 export function EntrySection ({
   titleName,
   isAllType,
+  pageNumber,
+  pageSize,
   data
 }: EntrySectionProps) {
   const allType = !!isAllType
-
-  // const layoutTypeClass = allType ? 'all-container' : 'recent-container'
-  // const entries = data.map(entry => {
-  //   return <Entry {...entry} />
-  // })
 
   const container = allType ? getAllLayout(data) : getRecentLayout(data)
 
@@ -29,14 +28,14 @@ export function EntrySection ({
     <div className='entry-section-container'>
       <span className='title'>{titleName}</span>
       {container}
-      {allType && <Paginator />}
+      {allType && <Paginator pageNumber={pageNumber!} pageSize={pageSize!} />}
     </div>
   )
 }
 
 function getAllLayout (entries: EntryInterface[]) {
   const genericEntries = entries.map(entry => {
-    return <Entry {...entry} />
+    return <Entry key={entry.id} {...entry} />
   })
 
   return <div className='entry-container all-container'>{genericEntries}</div>
