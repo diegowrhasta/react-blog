@@ -47,7 +47,7 @@ function Paginator ({ pageNumber }: PaginatorProps) {
         </button>
       </span>
       <span className='paginator-section'>
-        {getButtonDistribution(pageNumber, selectedPage)}
+        {getButtonDistribution(pageNumber, selectedPage, setSelectedPage)}
       </span>
       <span className='page-section next-section'>
         <button
@@ -82,7 +82,11 @@ function Paginator ({ pageNumber }: PaginatorProps) {
   )
 }
 
-function getButtonDistribution (pageNumber: number, selectedPage: number) {
+function getButtonDistribution (
+  pageNumber: number,
+  selectedPage: number,
+  updatePageFn: Dispatch<SetStateAction<number>>
+) {
   const maxFullSize = 6
   const pageEntry: number[] = []
   if (pageNumber > maxFullSize) {
@@ -105,7 +109,11 @@ function getButtonDistribution (pageNumber: number, selectedPage: number) {
     return (
       <div
         key={`${index}-page`}
-        className={`page-button ${selectedPage === entry ? 'selected' : ''}`}
+        className={`page-button ${calculateSelectedPage(
+          selectedPage,
+          entry
+        )} ${calculateNavigableButton(entry)}`}
+        onClick={() => onPageJump(entry, updatePageFn)}
       >
         {coalesceButtonText(entry)}
       </div>
@@ -138,6 +146,25 @@ function onPageChange (
   }
 
   updatePageFn(newPage)
+}
+
+function onPageJump (
+  pageToJump: number,
+  updatePageFn: Dispatch<SetStateAction<number>>
+) {
+  if (pageToJump === -1) {
+    return
+  }
+
+  updatePageFn(pageToJump)
+}
+
+function calculateSelectedPage (selectedPage: number, entry: number) {
+  return selectedPage === entry ? 'selected' : ''
+}
+
+function calculateNavigableButton (entry: number) {
+  return entry === -1 ? 'no-click' : ''
 }
 
 export { Paginator }
