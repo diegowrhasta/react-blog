@@ -5,7 +5,7 @@ import './Paginator.css'
 const PAGE_DIRECTIONS = {
   previousPage: -1,
   nextPage: 1
-}
+} as const
 
 interface PaginatorProps {
   pageNumber: number

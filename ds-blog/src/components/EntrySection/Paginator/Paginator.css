@@ -22,7 +22,7 @@ div.paginator-container {
       align-items: center;
       justify-content: center;
       border-radius: 30px;
-      padding: 8px;
+      padding: 15px;
       gap: 8px;
       color: var(--light-text);
       font-size: 14px;
