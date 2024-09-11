@@ -6,6 +6,7 @@ import './EntrySection.css'
 import { ENTRY_TYPES } from '../../constants'
 
 interface EntrySectionProps {
+  id: string
   titleName: string | undefined
   isAllType?: boolean
   pageNumber?: number
@@ -18,14 +19,15 @@ export function EntrySection ({
   isAllType,
   pageNumber,
   pageSize,
-  data
+  data,
+  id
 }: EntrySectionProps) {
   const allType = !!isAllType
 
   const container = allType ? getAllLayout(data) : getRecentLayout(data)
 
   return (
-    <div className='entry-section-container'>
+    <div id={id} className='entry-section-container'>
       <span className='title'>{titleName}</span>
       {container}
       {allType && <Paginator pageNumber={pageNumber!} pageSize={pageSize!} />}

@@ -33,14 +33,12 @@ function App () {
       .pipe(
         tap(state => {
           if (state.calculatingNewPage) {
-            const newCurrentPageEntries = entriesUtils.getPageEntries(entryData, state.currentPage!)
-            setCurrentPageEntries(
-              newCurrentPageEntries
-            )
-            updateCurrentPageState(
-              newCurrentPageEntries,
+            const newCurrentPageEntries = entriesUtils.getPageEntries(
+              entryData,
               state.currentPage!
             )
+            setCurrentPageEntries(newCurrentPageEntries)
+            updateCurrentPageState(newCurrentPageEntries, state.currentPage!)
           }
         })
       )
@@ -64,10 +62,12 @@ function App () {
       <Title></Title>
       <main>
         <EntrySection
+          id='recent'
           data={getRecentEntries(entryData)}
           titleName='Recent blog posts'
         ></EntrySection>
         <EntrySection
+          id='all'
           data={currentPageEntries}
           pageNumber={entriesUtils.getPageNumber(entryData.length)}
           pageSize={entriesUtils.PAGINATOR_CONFIG.pageSize}
