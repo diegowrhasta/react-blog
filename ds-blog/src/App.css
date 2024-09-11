@@ -1,11 +1,9 @@
 div.container {
   padding: 32px 73px 25px 73px;
+
   main {
     padding-top: 72px;
     padding-bottom: 72px;
-  }
-
-  main {
     display: flex;
     flex-direction: column;
     gap: 36px;
