@@ -1,0 +1,34 @@
+div.about-container {
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+
+  img {
+    width: 1216px;
+    height: 556px;
+    justify-self: center;
+    align-self: center;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    label {
+      font-weight: 600;
+      font-size: 24px;
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 16px;
+
+      ul {
+        li {
+          list-style-position: inside;
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,14 +12,8 @@ import { Home } from './pages/Home'
 import { About } from './pages/About'
 
 import './App.css'
-import { updateTitle } from './store'
-
-const defaultTitle = 'THE BLOG'
 
 function App () {
-  useEffect(() => {
-    updateTitle(defaultTitle)
-  }, [])
 
   function onChangeMode (event: React.MouseEvent<HTMLButtonElement>): void {
     console.log('app', event)

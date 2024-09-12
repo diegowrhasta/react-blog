@@ -8,20 +8,25 @@ import { getMockData } from '../data/blog-entries'
 import {
   allEntriesStore,
   updateAllEntriesStore,
-  updateCurrentPageState
+  updateCurrentPageState,
+  updateTitle
 } from '../store'
 import './Home.css'
 import { EntryInterface } from '../data'
+
+const defaultTitle = 'THE BLOG'
 
 function Home () {
   const [entryData] = useState(getMockData()!.sortEntries())
   const [currentPageEntries, setCurrentPageEntries] = useState(
     entriesUtils.getPageEntries(entryData, 1)
   )
+
   useState(() => {
     updateAllEntriesStore(entryData, currentPageEntries, 1)
     return 1
   })
+
   const [store$] = useState(
     allEntriesStore
       .pipe(
@@ -40,6 +45,7 @@ function Home () {
   )
 
   useEffect(() => {
+    updateTitle(defaultTitle)
     return () => {
       store$.unsubscribe()
     }
