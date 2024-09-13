@@ -1,20 +1,16 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { Header } from './components/Header'
 import { Title } from './components/Title'
 import { Footer } from './components/Footer'
 import { Home } from './pages/Home'
 import { About } from './pages/About'
+import { BlogEntry } from './pages/BlogEntry'
 
 import './App.css'
 
 function App () {
-
   function onChangeMode (event: React.MouseEvent<HTMLButtonElement>): void {
     console.log('app', event)
   }
@@ -28,6 +24,7 @@ function App () {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
+            <Route path='/entry' element={<BlogEntry />} />
           </Routes>
         </main>
         <footer>

@@ -27,7 +27,7 @@ function Home () {
     return 1
   })
 
-  const [store$] = useState(
+  const [store] = useState(
     allEntriesStore
       .pipe(
         tap(state => {
@@ -47,9 +47,9 @@ function Home () {
   useEffect(() => {
     updateTitle(defaultTitle)
     return () => {
-      store$.unsubscribe()
+      store.unsubscribe()
     }
-  }, [store$])
+  }, [store])
 
   return (
     <>

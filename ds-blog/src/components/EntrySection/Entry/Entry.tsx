@@ -4,6 +4,8 @@ import { EntryInterface } from '../../../data'
 import * as dateUtils from '../../../utils/date'
 import './Entry.css'
 import { ENTRY_TYPES } from '../../../constants'
+import { switchBlogRouting } from '../../../store'
+import { useNavigate } from 'react-router-dom'
 
 interface EntryProps extends EntryInterface {
   type?: EntryTypes | undefined
@@ -12,6 +14,8 @@ interface EntryProps extends EntryInterface {
 type EntryTypes = typeof ENTRY_TYPES[keyof typeof ENTRY_TYPES]
 
 function Entry (props: EntryProps) {
+  const navigate = useNavigate()
+
   const tags = props.labels.map((entry, index) => {
     return <Tag key={`${index}-tag`} label={entry} />
   })
@@ -21,6 +25,9 @@ function Entry (props: EntryProps) {
 
   function onEntryClick (event: React.MouseEvent<HTMLDivElement>) {
     event.stopPropagation()
+    
+    navigate('/entry')
+    switchBlogRouting()
   }
 
   return (
