@@ -89,7 +89,7 @@ export function About () {
               systems through APIs and different architectural patterns.
             </li>
             <li>
-              Implemented Thread Modeling efforts in order to mitigate risks and
+              Implemented Threat Modeling efforts in order to mitigate risks and
               document design decisions in cross-functional software development
               teams.
             </li>
