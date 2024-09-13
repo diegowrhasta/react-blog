@@ -20,14 +20,11 @@ div.about-container {
       font-size: 24px;
     }
 
-    p {
+    ul {
       font-weight: 400;
       font-size: 16px;
-
-      ul {
-        li {
-          list-style-position: inside;
-        }
+      li {
+        list-style-position: inside;
       }
     }
   }
