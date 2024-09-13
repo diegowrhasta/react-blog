@@ -17,18 +17,31 @@ function Entry (props: EntryProps) {
   })
 
   const entry = getEntryType(props, tags)
+  const coalescedType = props.type ? props.type : 'small-picture-top'
 
-  return entry
+  function onEntryClick (event: React.MouseEvent<HTMLDivElement>) {
+    event.stopPropagation()
+  }
+
+  return (
+    <div
+      onClick={onEntryClick}
+      key={props.id}
+      className={`entry ${coalescedType}`}
+    >
+      {entry}
+    </div>
+  )
 }
 
 function getEntryType (
-  { id, author, date, title, previewText, type }: EntryProps,
+  { author, date, title, previewText, type }: EntryProps,
   tags: JSX.Element[]
 ) {
   switch (type) {
     case 'medium-picture-top':
       return (
-        <div key={id} className={`entry ${type}`}>
+        <>
           <img
             src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
             alt='desktop'
@@ -39,11 +52,11 @@ function getEntryType (
           <span className='title'>{title}</span>
           <div className='text-preview'>{previewText}</div>
           <span className='labels'>{tags}</span>
-        </div>
+        </>
       )
     case 'small-picture-left':
       return (
-        <div key={id} className={`entry ${type}`}>
+        <>
           <img
             src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
             alt='desktop'
@@ -56,11 +69,11 @@ function getEntryType (
             <div className='text-preview'>{previewText}</div>
             <span className='labels'>{tags}</span>
           </section>
-        </div>
+        </>
       )
     case 'medium-picture-left':
       return (
-        <div key={id} className={`entry ${type}`}>
+        <>
           <img
             src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
             alt='desktop'
@@ -73,11 +86,11 @@ function getEntryType (
             <div className='text-preview'>{previewText}</div>
             <span className='labels'>{tags}</span>
           </section>
-        </div>
+        </>
       )
     case 'big-picture-top':
       return (
-        <div key={id} className={`entry ${type}`}>
+        <>
           <img
             src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
             alt='desktop'
@@ -88,11 +101,11 @@ function getEntryType (
           <span className='title'>{title}</span>
           <div className='text-preview'>{previewText}</div>
           <span className='labels'>{tags}</span>
-        </div>
+        </>
       )
     default:
       return (
-        <div key={id} className='entry small-picture-top'>
+        <>
           <img
             src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
             alt='desktop'
@@ -103,7 +116,7 @@ function getEntryType (
           <span className='title'>{title}</span>
           <div className='text-preview'>{previewText}</div>
           <span className='labels'>{tags}</span>
-        </div>
+        </>
       )
   }
 }
