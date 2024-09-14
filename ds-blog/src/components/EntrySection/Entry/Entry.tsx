@@ -4,7 +4,7 @@ import { EntryInterface } from '../../../data'
 import * as dateUtils from '../../../utils/date'
 import './Entry.css'
 import { ENTRY_TYPES } from '../../../constants'
-import { switchBlogRouting } from '../../../store'
+import { triggerEntryRouting } from '../../../store'
 import { useNavigate } from 'react-router-dom'
 
 interface EntryProps extends EntryInterface {
@@ -25,9 +25,9 @@ function Entry (props: EntryProps) {
 
   function onEntryClick (event: React.MouseEvent<HTMLDivElement>) {
     event.stopPropagation()
-    
-    navigate('/entry')
-    switchBlogRouting()
+
+    triggerEntryRouting(props.id)
+    navigate(`/entry/${props.id}`)
   }
 
   return (

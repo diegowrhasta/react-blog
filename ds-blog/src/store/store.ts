@@ -75,9 +75,17 @@ export function updateCurrentPageState (
   }))
 }
 
-export function switchBlogRouting () {
+export function triggerEntryRouting (blogId: string) {
   blogStore.update(state => ({
     ...state,
-    routing: !state.routing
+    routing: true,
+    blogId: blogId
+  }))
+}
+
+export function updateEntryLoaded () {
+  blogStore.update(state => ({
+    ...state,
+    routing: false
   }))
 }
