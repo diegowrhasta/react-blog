@@ -14,7 +14,7 @@ interface EntrySectionProps {
   data: EntryInterface[]
 }
 
-export function EntrySection ({
+function EntrySection ({
   titleName,
   isAllType,
   pageNumber,
@@ -79,3 +79,5 @@ function getRecentEntryType (itemIndex: number) {
 
   return ENTRY_TYPES.BIG_PICTURE_TOP
 }
+
+export { EntrySection }
