@@ -6,7 +6,7 @@ import { Title } from './components/Title'
 import { Footer } from './components/Footer'
 import { Home } from './pages/Home'
 import { About } from './pages/About'
-import { BlogEntry } from './pages/BlogEntry'
+import { BlogEntry } from './pages/BlogEntry/BlogEntry'
 
 import './App.css'
 

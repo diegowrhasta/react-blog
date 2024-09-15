@@ -1,0 +1,14 @@
+div.entry-container {
+  display: flex;
+  flex-direction: row;
+
+  section {
+    &.sidebar {
+      flex: 1 1 33%;
+    }
+
+    &.detail {
+      flex: 1 1 67%;
+    }
+  }
+}

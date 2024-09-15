@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { filter, tap } from 'rxjs'
 
+import { BlogEntrySidebar } from './BlogEntrySidebar'
+import { BlogEntryDetail } from './BlogEntryDetail'
+
 import './BlogEntry.css'
-import { blogStore, updateEntryLoaded } from '../store'
+import { blogStore, updateEntryLoaded } from '../../store'
 
 function BlogEntry () {
   const [entryId, setEntryId] = useState<string | undefined>(undefined)
@@ -33,7 +36,16 @@ function BlogEntry () {
     setValidatedEntryId(entryId ?? id)
   }, [entryId, id])
 
-  return <>{validatedEntryId}</>
+  return (
+    <div className='entry-container'>
+      <section className='sidebar'>
+        <BlogEntrySidebar entryId={validatedEntryId!} />
+      </section>
+      <section className='detail'>
+        <BlogEntryDetail />
+      </section>
+    </div>
+  )
 }
 
 export { BlogEntry }

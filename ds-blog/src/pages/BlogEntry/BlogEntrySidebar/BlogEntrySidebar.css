@@ -1,0 +1,7 @@
+div {
+  &.recent-blog-entries {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
