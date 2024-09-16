@@ -1,0 +1,39 @@
+article {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  span.date {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    color: #6941c6;
+  }
+
+  h3.title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    color: var(--text-color);
+  }
+
+  h4.subtitle {
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  img {
+    max-height: 426px;
+  }
+
+  p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--text-color);
+
+    &.definition {
+      text-align: center;
+    }
+  }
+}
