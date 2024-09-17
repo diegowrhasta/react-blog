@@ -29,13 +29,15 @@ function BlogEntrySidebar ({ entryId }: BlogEntrySidebarProps) {
     }
   }, [])
 
-  const entriesElements = entries.map(entry => {
-    if (entry.id === entryId) {
-      return null
-    }
+  const entriesElements = entries
+    .map(entry => {
+      if (entry.id === entryId) {
+        return null
+      }
 
-    return <Entry {...entry}></Entry>
-  })
+      return <Entry {...entry}></Entry>
+    })
+    .slice(0, 6)
 
   return (
     <div className='recent-blog-entries'>
