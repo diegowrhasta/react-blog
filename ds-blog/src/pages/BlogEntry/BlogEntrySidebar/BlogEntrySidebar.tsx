@@ -35,7 +35,7 @@ function BlogEntrySidebar ({ entryId }: BlogEntrySidebarProps) {
         return null
       }
 
-      return <Entry {...entry}></Entry>
+      return <Entry key={entry.id} {...entry}></Entry>
     })
     .slice(0, 6)
 

@@ -42,7 +42,7 @@ function BlogEntry () {
         <BlogEntrySidebar entryId={validatedEntryId!} />
       </section>
       <section className='detail'>
-        <BlogEntryDetail />
+        <BlogEntryDetail entryId={validatedEntryId!} />
       </section>
     </div>
   )

@@ -3,12 +3,12 @@ import { EntryInterface } from '../data/entry.interface'
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Array<T> {
-    sortEntries(this: EntryInterface[]): EntryInterface[]
+    sortEntriesDesc(this: EntryInterface[]): EntryInterface[]
   }
 }
 
-Array.prototype.sortEntries = function sortEntries (this: EntryInterface[]) {
-  return this.sort((a, b) => a.date.getTime() - b.date.getTime())
+Array.prototype.sortEntriesDesc = function sortEntries (this: EntryInterface[]) {
+  return this.sort((a, b) => b.date.getTime() - a.date.getTime())
 }
 
 const PAGINATOR_CONFIG: { pageSize: number } = {

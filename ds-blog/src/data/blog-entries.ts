@@ -102,6 +102,25 @@ function generateMockData () {
   for (let i = 0; i < randomLength; i++) {
     _mockData.push(createRandomEntry())
   }
+
+  _mockData[0] = {
+    id: '70e2c51a-f70f-4df5-9cb8-bc4b88260888',
+    author: 'Santos Dickens',
+    date: new Date('2024-09-17T10:20:00'),
+    labels: [
+      LABEL_ENTRIES['label-2'],
+      LABEL_ENTRIES['label-3'],
+      LABEL_ENTRIES['label-4']
+    ],
+    previewText: 'RDR2 is the best',
+    text: 'Coepi at degero comptus. Studio amissio volutabrum cavus cohaero decerno aeternus. Adicio quia subseco coepi doloribus perspiciatis corroboro vomito explicabo summisse.\nDepopulo suspendo articulus ipsa vigilo eos. Absconditus aedificium alienus. Virtus infit uredo.\nAstrum comminor theatrum teres subseco curiositas confugo. Tremo tristis tremo sophismata volubilis expedita suggero. Volubilis carpo voluptatem atrocitas tot.',
+    title: 'Arthur Morgan'
+  }
+  console.log('MOCK DATA', _mockData)
 }
 
-export { getMockData, LABEL_ENTRIES, ENTRY_DATA }
+function getBlogEntry (id: string) {
+  return _mockData?.find(x => x.id === id)
+}
+
+export { getMockData, LABEL_ENTRIES, ENTRY_DATA, getBlogEntry }

@@ -17,7 +17,7 @@ import { EntryInterface } from '../data'
 const defaultTitle = 'THE BLOG'
 
 function Home () {
-  const [entryData] = useState(getMockData()!.sortEntries())
+  const [entryData] = useState(getMockData()!.sortEntriesDesc())
   const [currentPageEntries, setCurrentPageEntries] = useState(
     entriesUtils.getPageEntries(entryData, 1)
   )
