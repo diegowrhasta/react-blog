@@ -9,25 +9,30 @@ import {
   allEntriesStore,
   updateAllEntriesStore,
   updateCurrentPageState,
-  updateTitle
+  useTitleStore
 } from '../store'
 import './Home.css'
 import { EntryInterface } from '../data'
 
-const defaultTitle = 'THE BLOG'
+const homeTitle = 'THE BLOG'
 
 function Home () {
+  const setTitle = useTitleStore(state => state.setTitle)
   const [entryData] = useState(getMockData()!.sortEntriesDesc())
   const [currentPageEntries, setCurrentPageEntries] = useState(
     entriesUtils.getPageEntries(entryData, 1)
   )
+
+  useEffect(() => {
+    setTitle(homeTitle)
+  }, [setTitle])
 
   useState(() => {
     updateAllEntriesStore(entryData, currentPageEntries, 1)
     return 1
   })
 
-  const [store] = useState(
+  useState(
     allEntriesStore
       .pipe(
         tap(state => {
@@ -43,13 +48,6 @@ function Home () {
       )
       .subscribe()
   )
-
-  useEffect(() => {
-    updateTitle(defaultTitle)
-    return () => {
-      store.unsubscribe()
-    }
-  }, [store])
 
   return (
     <>

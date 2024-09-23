@@ -1,28 +1,9 @@
-import { useEffect, useState } from 'react'
-import { Subject, takeUntil, tap } from 'rxjs'
-
-import { titleStore } from '../store'
-import * as observableUtils from '../utils/observables'
+import { useTitleStore } from '../store'
 
 import './Title.css'
 
 export function Title () {
-  const [titleText, setTitleText] = useState(titleStore.getValue().title)
-  const [onDestroy$] = useState(new Subject<boolean>())
+  const title = useTitleStore(state => state.title)
 
-  useEffect(() => {
-    titleStore
-      .pipe(
-        takeUntil(onDestroy$),
-        tap(state => {
-          setTitleText(state.title)
-        })
-      )
-      .subscribe()
-    return () => {
-      observableUtils.RunNotifier(onDestroy$)
-    }
-  }, [onDestroy$])
-
-  return <div className='title'>{titleText}</div>
+  return <div className='title'>{title}</div>
 }

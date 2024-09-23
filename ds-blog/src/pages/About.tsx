@@ -2,14 +2,16 @@ import { useEffect } from 'react'
 
 import aboutPicture from '../assets/about-picture.jpg'
 import './About.css'
-import { updateTitle } from '../store'
+import { useTitleStore } from '../store'
 
 const aboutTitle = 'Diego B.'
 
 export function About () {
+  const setTitle = useTitleStore(state => state.setTitle)
+
   useEffect(() => {
-    updateTitle(aboutTitle)
-  }, [])
+    setTitle(aboutTitle)
+  }, [setTitle])
 
   return (
     <div className='about-container'>
