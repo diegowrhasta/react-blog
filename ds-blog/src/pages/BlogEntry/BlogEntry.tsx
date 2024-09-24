@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { filter, tap } from 'rxjs'
 
 import { BlogEntrySidebar } from './BlogEntrySidebar'
 import { BlogEntryDetail } from './BlogEntryDetail'
 
 import './BlogEntry.css'
-import { blogStore, updateEntryLoaded } from '../../store'
+import { useBlogDetailStore } from '../../store'
 
 function BlogEntry () {
-  const [entryId, setEntryId] = useState<string | undefined>(undefined)
+  const routing = useBlogDetailStore(state => state.routing)
+  const blogId = useBlogDetailStore(state => state.blogId)
+  const setEntryAsLoaded = useBlogDetailStore(state => state.setEntryAsLoaded)
+
   const [validatedEntryId, setValidatedEntryId] = useState<string | undefined>(
     undefined
   )
@@ -17,24 +19,14 @@ function BlogEntry () {
   const { id } = useParams()
 
   useEffect(() => {
-    const subscription = blogStore
-      .pipe(
-        filter(state => state.routing),
-        tap(state => {
-          updateEntryLoaded()
-          setEntryId(state.blogId)
-        })
-      )
-      .subscribe()
-
-    return () => {
-      subscription.unsubscribe()
+    if (routing) {
+      setEntryAsLoaded()
     }
-  }, [])
+  }, [routing, setEntryAsLoaded])
 
   useEffect(() => {
-    setValidatedEntryId(entryId ?? id)
-  }, [entryId, id])
+    setValidatedEntryId(blogId ?? id)
+  }, [blogId, id])
 
   return (
     <div className='entry-container'>

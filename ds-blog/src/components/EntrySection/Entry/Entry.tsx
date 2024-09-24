@@ -4,7 +4,7 @@ import { EntryInterface } from '../../../data'
 import * as dateUtils from '../../../utils/date'
 import './Entry.css'
 import { ENTRY_TYPES } from '../../../constants'
-import { triggerEntryRouting } from '../../../store'
+import { useBlogDetailStore } from '../../../store'
 import { useNavigate } from 'react-router-dom'
 
 interface EntryProps extends EntryInterface {
@@ -15,6 +15,7 @@ type EntryTypes = typeof ENTRY_TYPES[keyof typeof ENTRY_TYPES]
 
 function Entry (props: EntryProps) {
   const navigate = useNavigate()
+  const triggerRouting = useBlogDetailStore(state => state.triggerRouting)
 
   const tags = props.labels.map((entry, index) => {
     return <Tag key={`${index}-tag`} label={entry} />
@@ -26,7 +27,7 @@ function Entry (props: EntryProps) {
   function onEntryClick (event: React.MouseEvent<HTMLDivElement>) {
     event.stopPropagation()
 
-    triggerEntryRouting(props.id)
+    triggerRouting(props.id)
     navigate(`/entry/${props.id}`)
   }
 

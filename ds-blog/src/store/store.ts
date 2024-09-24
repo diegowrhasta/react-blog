@@ -2,7 +2,6 @@ import { createStore, withProps } from '@ngneat/elf'
 
 import { AllEntriesInterface } from './interfaces'
 import { EntryInterface } from '../data'
-import { BlogsInterface } from './interfaces/blogs.interface'
 
 const allEntrisInitialState: AllEntriesInterface = {
   allEntries: undefined,
@@ -11,19 +10,9 @@ const allEntrisInitialState: AllEntriesInterface = {
   calculatingNewPage: false
 } as const
 
-const blogsInitialState: BlogsInterface = {
-  blogId: undefined,
-  routing: false
-} as const
-
 export const allEntriesStore = createStore(
   { name: 'all-entries' },
   withProps<AllEntriesInterface>(allEntrisInitialState)
-)
-
-export const blogStore = createStore(
-  { name: 'blogs' },
-  withProps<BlogsInterface>(blogsInitialState)
 )
 
 export function updateAllEntriesStore (
@@ -56,20 +45,5 @@ export function updateCurrentPageState (
     currentPageEntries: currentPageEntries,
     currentPage: currentPage,
     calculatingNewPage: false
-  }))
-}
-
-export function triggerEntryRouting (blogId: string) {
-  blogStore.update(state => ({
-    ...state,
-    routing: true,
-    blogId: blogId
-  }))
-}
-
-export function updateEntryLoaded () {
-  blogStore.update(state => ({
-    ...state,
-    routing: false
   }))
 }
