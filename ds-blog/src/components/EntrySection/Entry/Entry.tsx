@@ -17,7 +17,7 @@ function Entry (props: EntryProps) {
   const navigate = useNavigate()
   const triggerRouting = useBlogDetailStore(state => state.triggerRouting)
 
-  const tags = props.labels.map((entry, index) => {
+  const tags = (props.labels ?? []).map((entry, index) => {
     return <Tag key={`${index}-tag`} label={entry} />
   })
 

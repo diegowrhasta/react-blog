@@ -10,7 +10,7 @@ interface BlogEntrySidebarProps {
 function BlogEntrySidebar ({ entryId }: BlogEntrySidebarProps) {
   const allEntries = useAllEntriesStore(state => state.allEntries)
 
-  const entriesElements = allEntries!
+  const entriesElements = allEntries
     .filter(entry => entry.id !== entryId)
     .map(entry => {
       return <Entry key={entry.id} {...entry}></Entry>

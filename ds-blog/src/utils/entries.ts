@@ -20,8 +20,8 @@ function calculateRecentEntries (entries: EntryInterface[]) {
   return entries.slice(0, upperLimitCalculator)
 }
 
-function getPageNumber (entrySize: number) {
-  return Math.ceil(entrySize / PAGINATOR_CONFIG.pageSize)
+function getPageNumber (entriesLength: number) {
+  return Math.ceil(entriesLength / PAGINATOR_CONFIG.pageSize)
 }
 
 function getPageEntries (entries: EntryInterface[], pageNumber: number) {

@@ -4,9 +4,9 @@ import { type EntryInterface } from '../data/entry.interface'
 
 const useAllEntriesStore = create<AllEntriesInterface>(set => {
   return {
-    allEntries: undefined,
-    currentPageEntries: undefined,
-    currentPage: undefined,
+    allEntries: [],
+    currentPageEntries: [],
+    currentPage: 1,
     calculatingNewPage: false,
     updateAllEntries: (
       entries: EntryInterface[],

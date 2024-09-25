@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { EntrySection } from '../components/EntrySection/EntrySection'
 
 import * as entriesUtils from '../utils/entries'
-import { getMockData } from '../data/blog-entries'
 import { useAllEntriesStore, useTitleStore } from '../store'
 import './Home.css'
 import { EntryInterface } from '../data'
+import { loadEntries } from '../services'
 
 const homeTitle = 'THE BLOG'
 
@@ -17,14 +17,13 @@ function Home () {
     state => state.calculatingNewPage
   )
   const currentPage = useAllEntriesStore(state => state.currentPage)
+  const currentPageEntries = useAllEntriesStore(
+    state => state.currentPageEntries
+  )
+  const allEntries = useAllEntriesStore(state => state.allEntries)
   const updateAllEntries = useAllEntriesStore(state => state.updateAllEntries)
   const updateCurrentPageState = useAllEntriesStore(
     state => state.updateCurrentPageState
-  )
-
-  const [entryData] = useState(getMockData()!.sortEntriesDesc())
-  const [currentPageEntries, setCurrentPageEntries] = useState(
-    entriesUtils.getPageEntries(entryData, 1)
   )
 
   useEffect(() => {
@@ -32,8 +31,12 @@ function Home () {
   }, [setTitle])
 
   useEffect(() => {
-    updateAllEntries(entryData, currentPageEntries, 1)
-  }, [updateAllEntries, entryData, currentPageEntries])
+    if (allEntries.length !== 0) {
+      return
+    }
+
+    loadEntries(updateAllEntries)
+  }, [updateAllEntries, allEntries])
 
   useEffect(() => {
     if (!calculatingNewPage) {
@@ -41,34 +44,33 @@ function Home () {
     }
 
     const newCurrentPageEntries = entriesUtils.getPageEntries(
-      entryData,
-      currentPage!
+      allEntries,
+      currentPage
     )
-    setCurrentPageEntries(newCurrentPageEntries)
-    updateCurrentPageState(newCurrentPageEntries, currentPage!)
-  }, [calculatingNewPage, entryData, currentPage, updateCurrentPageState])
+    updateCurrentPageState(newCurrentPageEntries, currentPage)
+  }, [calculatingNewPage, allEntries, currentPage, updateCurrentPageState])
+
+  function getRecentEntries (entries: EntryInterface[]) {
+    return entriesUtils.calculateRecentEntries(entries)
+  }
 
   return (
     <>
       <EntrySection
         id='recent'
-        data={getRecentEntries(entryData)}
+        data={getRecentEntries(allEntries)}
         titleName='Recent blog posts'
       ></EntrySection>
       <EntrySection
         id='all'
         data={currentPageEntries}
-        pageNumber={entriesUtils.getPageNumber(entryData.length)}
+        pageNumber={entriesUtils.getPageNumber(allEntries.length)}
         pageSize={entriesUtils.PAGINATOR_CONFIG.pageSize}
         titleName='All blog posts'
         isAllType
       ></EntrySection>
     </>
   )
-}
-
-function getRecentEntries (entries: EntryInterface[]) {
-  return entriesUtils.calculateRecentEntries(entries)
 }
 
 export { Home }
