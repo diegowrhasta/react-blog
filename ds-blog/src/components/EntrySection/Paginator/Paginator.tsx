@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 import './Paginator.css'
-import { updateNewPageCalculation } from '../../../store'
+import { useAllEntriesStore } from '../../../store'
 
 const PAGE_DIRECTIONS = {
   previousPage: -1,
@@ -14,11 +14,14 @@ interface PaginatorProps {
 }
 
 function Paginator ({ pageNumber }: PaginatorProps) {
+  const updateNewPageCalculation = useAllEntriesStore(
+    state => state.updateNewPageCalculation
+  )
   const [selectedPage, setSelectedPage] = useState(1)
 
   useEffect(() => {
     updateNewPageCalculation(selectedPage)
-  }, [selectedPage])
+  }, [selectedPage, updateNewPageCalculation])
 
   return (
     <div className='paginator-container'>

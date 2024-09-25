@@ -1,16 +1,10 @@
 import { useEffect, useState } from 'react'
-import { tap } from 'rxjs'
 
 import { EntrySection } from '../components/EntrySection/EntrySection'
 
 import * as entriesUtils from '../utils/entries'
 import { getMockData } from '../data/blog-entries'
-import {
-  allEntriesStore,
-  updateAllEntriesStore,
-  updateCurrentPageState,
-  useTitleStore
-} from '../store'
+import { useAllEntriesStore, useTitleStore } from '../store'
 import './Home.css'
 import { EntryInterface } from '../data'
 
@@ -18,6 +12,16 @@ const homeTitle = 'THE BLOG'
 
 function Home () {
   const setTitle = useTitleStore(state => state.setTitle)
+
+  const calculatingNewPage = useAllEntriesStore(
+    state => state.calculatingNewPage
+  )
+  const currentPage = useAllEntriesStore(state => state.currentPage)
+  const updateAllEntries = useAllEntriesStore(state => state.updateAllEntries)
+  const updateCurrentPageState = useAllEntriesStore(
+    state => state.updateCurrentPageState
+  )
+
   const [entryData] = useState(getMockData()!.sortEntriesDesc())
   const [currentPageEntries, setCurrentPageEntries] = useState(
     entriesUtils.getPageEntries(entryData, 1)
@@ -27,27 +31,22 @@ function Home () {
     setTitle(homeTitle)
   }, [setTitle])
 
-  useState(() => {
-    updateAllEntriesStore(entryData, currentPageEntries, 1)
-    return 1
-  })
+  useEffect(() => {
+    updateAllEntries(entryData, currentPageEntries, 1)
+  }, [updateAllEntries, entryData, currentPageEntries])
 
-  useState(
-    allEntriesStore
-      .pipe(
-        tap(state => {
-          if (state.calculatingNewPage) {
-            const newCurrentPageEntries = entriesUtils.getPageEntries(
-              entryData,
-              state.currentPage!
-            )
-            setCurrentPageEntries(newCurrentPageEntries)
-            updateCurrentPageState(newCurrentPageEntries, state.currentPage!)
-          }
-        })
-      )
-      .subscribe()
-  )
+  useEffect(() => {
+    if (!calculatingNewPage) {
+      return
+    }
+
+    const newCurrentPageEntries = entriesUtils.getPageEntries(
+      entryData,
+      currentPage!
+    )
+    setCurrentPageEntries(newCurrentPageEntries)
+    updateCurrentPageState(newCurrentPageEntries, currentPage!)
+  }, [calculatingNewPage, entryData, currentPage, updateCurrentPageState])
 
   return (
     <>

@@ -1,43 +1,21 @@
-import { useEffect, useState } from 'react'
-import { filter, tap } from 'rxjs'
-
 import { Entry } from '../../../components'
 
 import './BlogEntrySidebar.css'
-import { EntryInterface } from '../../../data'
-import { allEntriesStore } from '../../../store'
+import { useAllEntriesStore } from '../../../store'
 
 interface BlogEntrySidebarProps {
   entryId: string
 }
 
 function BlogEntrySidebar ({ entryId }: BlogEntrySidebarProps) {
-  const [entries, setEntries] = useState<EntryInterface[]>([])
+  const allEntries = useAllEntriesStore(state => state.allEntries)
 
-  useEffect(() => {
-    const subscription = allEntriesStore
-      .pipe(
-        filter(state => !!state.allEntries),
-        tap(state => {
-          setEntries(state.allEntries!)
-        })
-      )
-      .subscribe()
-
-    return () => {
-      subscription.unsubscribe()
-    }
-  }, [])
-
-  const entriesElements = entries
+  const entriesElements = allEntries!
+    .filter(entry => entry.id !== entryId)
     .map(entry => {
-      if (entry.id === entryId) {
-        return null
-      }
-
       return <Entry key={entry.id} {...entry}></Entry>
     })
-    .slice(0, 6)
+    .slice(0, 5)
 
   return (
     <div className='recent-blog-entries'>

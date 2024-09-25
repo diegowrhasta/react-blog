@@ -5,4 +5,14 @@ export interface AllEntriesInterface {
   currentPageEntries: EntryInterface[] | undefined
   currentPage: number | undefined
   calculatingNewPage: boolean
+  updateAllEntries: (
+    entries: EntryInterface[],
+    currentPageEntries: EntryInterface[],
+    currentPage: number
+  ) => void
+  updateNewPageCalculation: (selectedPage: number) => void
+  updateCurrentPageState: (
+    currentPageEntries: EntryInterface[],
+    currentPage: number
+  ) => void
 }
