@@ -1,10 +1,6 @@
 button.mode-button {
   width: 96px;
   height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
   border-radius: 29px;
   background: var(--mode-btn-bg);
   cursor: pointer;

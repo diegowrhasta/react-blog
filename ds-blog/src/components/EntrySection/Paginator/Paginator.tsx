@@ -45,7 +45,6 @@ function Paginator ({ pageNumber }: PaginatorProps) {
           >
             <path
               d='M15.8334 10.4998H4.16675M4.16675 10.4998L10.0001 16.3332M4.16675 10.4998L10.0001 4.6665'
-              stroke='#667085'
               strokeWidth='1.67'
               strokeLinecap='round'
               strokeLinejoin='round'
@@ -78,7 +77,6 @@ function Paginator ({ pageNumber }: PaginatorProps) {
           >
             <path
               d='M15.8334 10.4998H4.16675M4.16675 10.4998L10.0001 16.3332M4.16675 10.4998L10.0001 4.6665'
-              stroke='#667085'
               strokeWidth='1.67'
               strokeLinecap='round'
               strokeLinejoin='round'

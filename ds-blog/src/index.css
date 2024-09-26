@@ -16,8 +16,22 @@
   --paginator-border-color: 1px solid rgba(0, 0, 0, 0.14);
   --bg-color: #ffffff;
   --text-color: #1a1a1a;
-  --mode-btn-bg: #090D1F;
+  --mode-btn-bg: #090d1f;
   --light-text: #667085;
+  --paginator-text: #7f56d9;
+  --paginator-button-hover: rgba(200, 200, 200, 0.5);
+
+  .dark-theme {
+    --border-color: 2px solid #fff;
+    --title-border-color: 1px solid white;
+    --paginator-border-color: 1px solid rgba(234, 236, 240, 0.34);
+    --bg-color: #090d1f;
+    --text-color: #ffffff;
+    --mode-btn-bg: #ffffff;
+    --light-text: #efefef;
+    --paginator-text: #112211;
+    --paginator-button-hover: rgba(255, 255, 255, 0.1);
+  }
 }
 
 body {

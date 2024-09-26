@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { Header } from './components/Header'
@@ -11,8 +10,8 @@ import { BlogEntry } from './pages/BlogEntry/BlogEntry'
 import './App.css'
 
 function App () {
-  function onChangeMode (event: React.MouseEvent<HTMLButtonElement>): void {
-    console.log('app', event)
+  function onChangeMode (): void {
+    document.body.classList.toggle('dark-theme')
   }
 
   return (

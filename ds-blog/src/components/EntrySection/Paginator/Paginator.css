@@ -28,8 +28,14 @@ div.paginator-container {
       font-size: 14px;
 
       &:hover {
-        background-color: rgba(200, 200, 200, 0.5);
+        background-color: var(--paginator-button-hover);
         cursor: pointer;
+      }
+    }
+
+    svg {
+      path {
+        stroke: var(--light-text);
       }
     }
 
@@ -57,7 +63,7 @@ div.paginator-container {
 
       &.selected {
         background: #f9f5ff;
-        color: #7f56d9;
+        color: var(--paginator-text);
       }
 
       &:hover {
