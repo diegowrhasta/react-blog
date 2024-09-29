@@ -84,7 +84,6 @@ div.entry {
   &.small-picture-top {
     display: flex;
     flex-direction: column;
-    flex: 1 1 calc(33.33% - 24px);
     gap: 24px;
 
     img {
