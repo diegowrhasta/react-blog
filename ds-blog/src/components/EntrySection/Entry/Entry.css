@@ -20,7 +20,7 @@ div.entry {
   label.main-details {
     color: #6941c6;
     font-weight: 600;
-    font-size: 14pxk;
+    font-size: 14px;
   }
 
   span.title {
@@ -37,6 +37,7 @@ div.entry {
   span.labels {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 8px;
   }
 
@@ -88,6 +89,33 @@ div.entry {
 
     img {
       max-height: 240px;
+    }
+  }
+}
+
+div.all-container {
+  div.entry {
+    &.small-picture-top {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 calc(33.33% - 18px);
+      gap: 24px;
+
+      @media (max-width: 834px) {
+        flex: 1 1 calc(50% - 18px);
+
+        img {
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          object-fit: cover;
+        }
+      }
+
+      img {
+        max-height: 240px;
+        object-fit: cover;
+      }
     }
   }
 }
