@@ -32,8 +32,15 @@ The idea was to make use of all basic features of React as well as good practice
 in modern web development with javascript and typescript in order to make a blog 
 website that will be used personally for different topics.
 
+Things as:
+
+- Typescript Barrels
+- Vertical Slice Architecture (for folder structure)
+- CSS global variables for easy swap out of color palette (dark mode enablement)
+- 
+
 ## Libraries Used
 
 - Elf.js
-- rxjs
+- Zustand
 - React Router
