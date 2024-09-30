@@ -2,12 +2,12 @@ import { useEffect } from 'react'
 
 import aboutPicture from '../assets/about-picture.jpg'
 import './About.css'
-import { useTitleStore } from '../store'
+import { useGlobalStore } from '../store'
 
 const aboutTitle = 'Diego B.'
 
 export function About () {
-  const setTitle = useTitleStore(state => state.setTitle)
+  const setTitle = useGlobalStore(state => state.setTitle)
 
   useEffect(() => {
     setTitle(aboutTitle)

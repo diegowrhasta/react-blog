@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { EntrySection } from '../components/EntrySection/EntrySection'
 
 import * as entriesUtils from '../utils/entries'
-import { useAllEntriesStore, useTitleStore } from '../store'
+import { useAllEntriesStore, useGlobalStore } from '../store'
 import './Home.css'
 import { EntryInterface } from '../data'
 import { loadEntries } from '../services'
@@ -11,7 +11,7 @@ import { loadEntries } from '../services'
 const homeTitle = 'THE BLOG'
 
 function Home () {
-  const setTitle = useTitleStore(state => state.setTitle)
+  const setTitle = useGlobalStore(state => state.setTitle)
 
   const calculatingNewPage = useAllEntriesStore(
     state => state.calculatingNewPage

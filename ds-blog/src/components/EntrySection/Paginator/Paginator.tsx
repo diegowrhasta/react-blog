@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 import './Paginator.css'
-import { useAllEntriesStore } from '../../../store'
+import { useAllEntriesStore, useGlobalStore } from '../../../store'
 
 const PAGE_DIRECTIONS = {
   previousPage: -1,
@@ -17,6 +17,7 @@ function Paginator ({ pageNumber }: PaginatorProps) {
   const updateNewPageCalculation = useAllEntriesStore(
     state => state.updateNewPageCalculation
   )
+  const setScrollToBottom = useGlobalStore(state => state.setScrollToBottom)
   const [selectedPage, setSelectedPage] = useState(1)
 
   useEffect(() => {
@@ -32,7 +33,8 @@ function Paginator ({ pageNumber }: PaginatorProps) {
               PAGE_DIRECTIONS.previousPage,
               selectedPage,
               pageNumber,
-              setSelectedPage
+              setSelectedPage,
+              setScrollToBottom
             )
           }
         >
@@ -54,7 +56,12 @@ function Paginator ({ pageNumber }: PaginatorProps) {
         </button>
       </span>
       <span className='paginator-section'>
-        {getButtonDistribution(pageNumber, selectedPage, setSelectedPage)}
+        {getButtonDistribution(
+          pageNumber,
+          selectedPage,
+          setSelectedPage,
+          setScrollToBottom
+        )}
       </span>
       <span className='page-section next-section'>
         <button
@@ -63,7 +70,8 @@ function Paginator ({ pageNumber }: PaginatorProps) {
               PAGE_DIRECTIONS.nextPage,
               selectedPage,
               pageNumber,
-              setSelectedPage
+              setSelectedPage,
+              setScrollToBottom
             )
           }
         >
@@ -91,7 +99,8 @@ function Paginator ({ pageNumber }: PaginatorProps) {
 function getButtonDistribution (
   pageNumber: number,
   selectedPage: number,
-  updatePageFn: Dispatch<SetStateAction<number>>
+  updatePageFn: Dispatch<SetStateAction<number>>,
+  setScrollToBottom: (scrollToBottom: boolean) => void
 ) {
   const maxFullSize = 6
   const pageEntry: number[] = []
@@ -119,7 +128,7 @@ function getButtonDistribution (
           selectedPage,
           entry
         )} ${calculateNavigableButton(entry)}`}
-        onClick={() => onPageJump(entry, updatePageFn)}
+        onClick={() => onPageJump(entry, updatePageFn, setScrollToBottom)}
       >
         {coalesceButtonText(entry)}
       </div>
@@ -139,7 +148,8 @@ function onPageChange (
   direction: number,
   currentPage: number,
   pageNumber: number,
-  updatePageFn: Dispatch<SetStateAction<number>>
+  updatePageFn: Dispatch<SetStateAction<number>>,
+  setScrollToBottom: (scrollToBottom: boolean) => void
 ) {
   let newPage = currentPage + direction
 
@@ -152,17 +162,20 @@ function onPageChange (
   }
 
   updatePageFn(newPage)
+  setScrollToBottom(true)
 }
 
 function onPageJump (
   pageToJump: number,
-  updatePageFn: Dispatch<SetStateAction<number>>
+  updatePageFn: Dispatch<SetStateAction<number>>,
+  setScrollToBottom: (scrollToBottom: boolean) => void
 ) {
   if (pageToJump === -1) {
     return
   }
 
   updatePageFn(pageToJump)
+  setScrollToBottom(true)
 }
 
 function calculateSelectedPage (selectedPage: number, entry: number) {

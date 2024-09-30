@@ -1,5 +1,5 @@
 export * from './interfaces'
 
-export * from './title.store'
+export * from './global.store'
 export * from './blog-detail.store'
 export * from './all-entries.store'
