@@ -87,7 +87,10 @@ div.entry {
     gap: 24px;
 
     img {
-      max-height: 240px;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
     }
   }
 }
@@ -102,17 +105,16 @@ div.all-container {
 
       @media (max-width: 834px) {
         flex: 1 1 calc(50% - 18px);
+      }
 
-        img {
-          width: 100%;
-          max-width: 100%;
-          height: auto;
-          object-fit: cover;
-        }
+      @media (max-width: 390px) {
+        flex: 1 1 calc(100% - 18px);
       }
 
       img {
-        max-height: 240px;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
         object-fit: cover;
       }
     }

@@ -39,21 +39,15 @@ function EntrySection ({
   }
 
   function getRecentLayoutForScreen (entries: EntryInterface[]) {
-    const phoneWindow = window.matchMedia('(max-width): 390px')
+    const phoneWindow = window.matchMedia('(max-width: 390px)')
 
     if (phoneWindow.matches) {
       return (
-        <div className='entry-container recent-desktop-container'>
-          <div className='first-row'>
-            <Entry type={getRecentEntryType(0)} {...entries[0]} />
-            <div className='stacked-entries'>
-              <Entry type={getRecentEntryType(1)} {...entries[1]} />
-              <Entry type={getRecentEntryType(2)} {...entries[2]} />
-            </div>
-          </div>
-          <div className='last-item'>
-            <Entry type={getRecentEntryType(3)} {...entries[3]} />
-          </div>
+        <div className='entry-container recent-mobile-container'>
+          <Entry type={getRecentEntryType(0)} {...entries[0]} />
+          <Entry type={getRecentEntryType(1)} {...entries[1]} />
+          <Entry type={getRecentEntryType(2)} {...entries[2]} />
+          <Entry type={getRecentEntryType(3)} {...entries[3]} />
         </div>
       )
     }
@@ -94,20 +88,10 @@ function EntrySection ({
   }
 
   function getRecentEntryType (itemIndex: number) {
-    const phoneWindow = window.matchMedia('(max-width): 390px')
+    const phoneWindow = window.matchMedia('(max-width: 390px)')
 
     if (phoneWindow.matches) {
-      switch (itemIndex) {
-        case 0:
-          return ENTRY_TYPES.BIG_PICTURE_TOP
-        case 1:
-        case 2:
-          return ENTRY_TYPES.SMALL_PICTURE_LEFT
-        case 3:
-          return ENTRY_TYPES.SMALL_PICTURE_LEFT
-        default:
-          return ENTRY_TYPES.BIG_PICTURE_TOP
-      }
+      return ENTRY_TYPES.SMALL_PICTURE_TOP
     }
 
     const ipadWindow = window.matchMedia('(max-width: 834px)')
