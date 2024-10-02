@@ -1,15 +1,17 @@
-function isAtBottom (container: HTMLDivElement) {
-  return container.scrollHeight - container.scrollTop === container.clientHeight
+const SCROLL_TIMEOUT = 50
+
+let scrollTimeout: number
+
+function scrollToBottom () {
+  window.scrollTo(0, document.body.scrollHeight)
 }
 
-function scrollToBottom (container: HTMLDivElement) {
-  container.scrollTop = container.scrollHeight
-}
-
-function onContentUpdate (scrollContainer: HTMLDivElement) {
-  if (isAtBottom(scrollContainer)) {
-    scrollToBottom(scrollContainer)
-  }
+function onContentUpdate () {
+  scrollToBottom()
+  clearTimeout(scrollTimeout)
+  scrollTimeout = setTimeout(() => {
+    scrollToBottom()
+  }, SCROLL_TIMEOUT)
 }
 
 export { onContentUpdate }

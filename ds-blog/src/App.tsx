@@ -9,18 +9,16 @@ import { BlogEntry } from './pages/BlogEntry/BlogEntry'
 
 import './App.css'
 import { useGlobalStore } from './store'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import * as scrollUtils from './utils/scroll'
 
 function App () {
   const setScrollToBottom = useGlobalStore(state => state.setScrollToBottom)
   const scrollToBottom = useGlobalStore(state => state.scrollToBottom)
 
-  const containerRef = useRef<HTMLDivElement>(null)
-
   useEffect(() => {
     if (scrollToBottom) {
-      scrollUtils.onContentUpdate(containerRef.current!)
+      scrollUtils.onContentUpdate()
       setScrollToBottom(false)
     }
   }, [scrollToBottom, setScrollToBottom])
@@ -31,7 +29,7 @@ function App () {
 
   return (
     <Router>
-      <div ref={containerRef} className='container'>
+      <div className='container'>
         <Header onModeButtonClick={onChangeMode}></Header>
         <Title></Title>
         <main>
