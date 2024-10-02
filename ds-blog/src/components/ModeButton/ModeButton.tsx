@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import './ModeButton.css'
-import { ModeIcon } from './ModeIcon'
+import { ModeIcon } from './ModeIcon/ModeIcon'
 
 interface ModeButtonProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void

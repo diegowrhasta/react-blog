@@ -8,7 +8,7 @@ function ModeIcon ({ mode }: ModeIconProps) {
   return (
     <>
       {mode === 'dark' && (
-        <div className='mode-icons'>
+        <div className='mode-icons dark'>
           <svg
             width='24'
             height='24'
@@ -41,7 +41,7 @@ function ModeIcon ({ mode }: ModeIconProps) {
         </div>
       )}
       {mode === 'light' && (
-        <div className='mode-icons'>
+        <div className='mode-icons light'>
           <svg
             id='sun'
             width='24'

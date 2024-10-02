@@ -1,7 +1,7 @@
 export * from './Footer'
 export * from './Header'
-export * from './ModeButton'
+export * from './ModeButton/ModeButton'
 export * from './Title'
-export * from './ModeIcon'
+export * from './ModeButton/ModeIcon/ModeIcon'
 
 export * from './EntrySection'

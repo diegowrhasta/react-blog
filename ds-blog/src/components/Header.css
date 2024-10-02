@@ -13,7 +13,11 @@ header {
       display: flex;
       align-items: center;
       font-weight: 600;
-      font-size: 20px;
+      font-size: 1.25rem;
+
+      @media (max-width: 390px) {
+        font-size: 1.125rem;
+      }
     }
 
     nav {
@@ -33,6 +37,56 @@ header {
         &:hover {
           border-bottom: var(--border-color);
         }
+      }
+
+      @media (max-width: 390px) {
+        display: none;
+      }
+    }
+
+    button.hamburger {
+      display: none;
+
+      @media (max-width: 390px) {
+        display: block;
+      }
+    }
+
+    div.overlay-menu {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: var(--bg-color);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 38px;
+
+      a {
+        &:link,
+        &:visited {
+          color: var(--font-color);
+          text-decoration: none;
+        }
+
+        &:hover {
+          border-bottom: var(--border-color);
+        }
+      }
+
+      h3 {
+        margin-bottom: 20px;
+      }
+
+      h2.close-overlay {
+        position: absolute;
+        bottom: 0;
+        padding: 20px;
+        cursor: pointer;
       }
     }
   }

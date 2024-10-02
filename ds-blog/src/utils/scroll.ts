@@ -7,7 +7,6 @@ function scrollToBottom () {
 }
 
 function onContentUpdate () {
-  scrollToBottom()
   clearTimeout(scrollTimeout)
   scrollTimeout = setTimeout(() => {
     scrollToBottom()
