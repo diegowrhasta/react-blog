@@ -15,6 +15,7 @@ import * as scrollUtils from './utils/scroll'
 function App () {
   const setScrollToBottom = useGlobalStore(state => state.setScrollToBottom)
   const scrollToBottom = useGlobalStore(state => state.scrollToBottom)
+  const setMode = useGlobalStore(state => state.setMode)
 
   useEffect(() => {
     if (scrollToBottom) {
@@ -25,6 +26,12 @@ function App () {
 
   function onChangeMode (): void {
     document.body.classList.toggle('dark-theme')
+
+    const newMode = document.body.classList.contains('dark-theme')
+      ? 'dark'
+      : 'light'
+
+    setMode(newMode)
   }
 
   return (

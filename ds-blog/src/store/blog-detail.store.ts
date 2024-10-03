@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { type BlogDetailInterface } from './interfaces'
+import { type BlogDetailInterface } from './types'
 
 const useBlogDetailStore = create<BlogDetailInterface>(set => {
   return {

@@ -1,7 +1,8 @@
+import { type modeType } from '../../../store/types'
 import './ModeIcon.css'
 
 interface ModeIconProps {
-  mode: 'dark' | 'light'
+  mode: modeType
 }
 
 function ModeIcon ({ mode }: ModeIconProps) {

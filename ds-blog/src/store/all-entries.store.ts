@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { type AllEntriesInterface } from './interfaces'
+import { type AllEntriesInterface } from './types'
 import { type EntryInterface } from '../data/entry.interface'
 
 const useAllEntriesStore = create<AllEntriesInterface>(set => {
