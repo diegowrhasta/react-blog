@@ -44,8 +44,10 @@ header {
       }
     }
 
-    button.hamburger {
+    button#hamburger {
       display: none;
+      background-color: transparent;
+      border: none;
 
       @media (max-width: 390px) {
         display: block;
