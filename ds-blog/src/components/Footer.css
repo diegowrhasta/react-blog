@@ -2,6 +2,7 @@ div.links {
   ul {
     list-style: none;
     display: flex;
+    flex-direction: column;
     gap: 15px;
 
     li {
@@ -15,5 +16,16 @@ div.links {
         }
       }
     }
+
+    @media (max-width: 390px) {
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 390px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

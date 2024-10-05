@@ -10,12 +10,17 @@ export function Footer () {
     window.open(link, '_blank')
   }
 
+  function isMobile () {
+    return window.matchMedia('(max-width: 390px)')
+  }
+
   return (
     <div className='links'>
       <ul>
-        <li className='static'>© 2024</li>
+        {!isMobile() && <li className='static'>© 2024</li>}
         <li onClick={() => onLinkClick(LINKS.linkedIn)}>LinkedIn</li>
         <li onClick={() => onLinkClick(LINKS.email)}>Email</li>
+        {isMobile() && <li className='static'>© 2024</li>}
       </ul>
     </div>
   )
