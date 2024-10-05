@@ -5,10 +5,16 @@ div.paginator-container {
   align-items: center;
   border-top: var(--paginator-border-color);
   padding-top: 21px;
+  padding-bottom: 21px;
 
   span.page-section,
   span.paginator-section {
     place-self: center;
+  }
+
+  @media (max-width: 390px) {
+    flex-direction: column;
+    border-bottom: var(--paginator-border-color);
   }
 
   span.page-section {

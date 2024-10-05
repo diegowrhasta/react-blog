@@ -11,5 +11,9 @@ div.container {
     display: flex;
     flex-direction: column;
     gap: 36px;
+
+    @media (max-width: 390px) {
+      padding-top: 42px;
+    }
   }
 }
