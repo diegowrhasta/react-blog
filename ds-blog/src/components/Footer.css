@@ -1,9 +1,20 @@
 div.links {
+  @media (max-width: 390px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   ul {
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 15px;
+
+    @media (max-width: 390px) {
+      align-items: center;
+      justify-content: center;
+    }
 
     li {
       font-size: 20px;
@@ -16,16 +27,5 @@ div.links {
         }
       }
     }
-
-    @media (max-width: 390px) {
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  @media (max-width: 390px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 }
