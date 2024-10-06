@@ -6,10 +6,18 @@ div.entry-container {
   section {
     &.sidebar {
       flex: 1 1 33%;
+
+      @media (max-width: 390px) {
+        display: none;
+      }
     }
 
     &.detail {
       flex: 1 1 67%;
+
+      @media (max-width: 390px) {
+        flex: 1 1 100%;
+      }
     }
   }
 }
