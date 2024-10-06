@@ -4,8 +4,10 @@ div.about-container {
   gap: 21px;
 
   img {
-    width: 1216px;
-    height: 556px;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
     justify-self: center;
     align-self: center;
   }

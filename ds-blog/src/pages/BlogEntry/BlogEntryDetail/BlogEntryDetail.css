@@ -23,7 +23,10 @@ article {
   }
 
   img {
-    max-height: 426px;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
   }
 
   p {
