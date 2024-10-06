@@ -1,43 +1,58 @@
-article {
+div.detail-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 42px;
 
-  span.date {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    color: #6941c6;
+  article {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    span.date {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      color: #6941c6;
+    }
+
+    h3.title {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 36px;
+      color: var(--text-color);
+    }
+
+    h4.subtitle {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    p {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--text-color);
+      text-align: justify;
+
+      &.definition {
+        text-align: center;
+      }
+    }
   }
 
-  h3.title {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 36px;
-    color: var(--text-color);
-  }
-
-  h4.subtitle {
-    font-weight: 700;
-    font-size: 18px;
-  }
-
-  img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-
-  p {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    color: var(--text-color);
-    text-align: justify;
-
-    &.definition {
-      text-align: center;
+  span {
+    &.labels {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 8px;
     }
   }
 }

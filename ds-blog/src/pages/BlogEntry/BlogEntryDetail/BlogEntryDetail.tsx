@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import './BlogEntryDetail.css'
-import { getBlogEntry } from '../../../data'
+import { getBlogEntry, type LabelInterface } from '../../../data'
 import { useBlogDetailStore } from '../../../store'
+import { Tag } from '../../../components'
 
 interface BlogEntryDetailProps {
   entryId: string
@@ -12,8 +13,10 @@ function BlogEntryDetail ({ entryId }: BlogEntryDetailProps) {
   const setIsLoading = useBlogDetailStore(state => state.setDetailLoading)
 
   const [entryContent, setEntryContent] = useState('')
+  const [tags, setTags] = useState<LabelInterface[]>([])
   const articleRef = useRef<HTMLDivElement>(null)
 
+  // Loading of html effect
   useEffect(() => {
     if (!entryId) {
       return
@@ -28,7 +31,8 @@ function BlogEntryDetail ({ entryId }: BlogEntryDetailProps) {
     }
 
     setIsLoading(true)
-    const { date } = getBlogEntry(entryId)!
+    const { date, labels } = getBlogEntry(entryId)!
+    setTags(labels)
 
     fetch(`/blogs/${date.getFullYear()}/${date.getMonth() + 1}/${entryId}.html`)
       .then(response => {
@@ -39,6 +43,7 @@ function BlogEntryDetail ({ entryId }: BlogEntryDetailProps) {
       .catch(console.log)
   }, [entryId, setIsLoading])
 
+  // Loading of all media check plus loading effect
   useEffect(() => {
     const checkImagesLoaded = (
       ref: React.MutableRefObject<HTMLDivElement | null>
@@ -99,14 +104,21 @@ function BlogEntryDetail ({ entryId }: BlogEntryDetailProps) {
     return cleanup
   }, [articleRef, entryContent, setIsLoading])
 
+  const tagElements = (tags ?? []).map((entry, index) => {
+    return <Tag key={`${index}-tag`} label={entry} />
+  })
+
   return (
     <>
       {detailLoading && <h2 style={{ textAlign: 'center' }}>Loading...</h2>}
       {!detailLoading && (
-        <article
-          ref={articleRef}
-          dangerouslySetInnerHTML={{ __html: entryContent }}
-        ></article>
+        <div className='detail-container'>
+          <article
+            ref={articleRef}
+            dangerouslySetInnerHTML={{ __html: entryContent }}
+          ></article>
+          <span className='labels'>{tagElements}</span>
+        </div>
       )}
     </>
   )
