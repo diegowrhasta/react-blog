@@ -11,7 +11,7 @@ export function Footer () {
   }
 
   function isMobile () {
-    return window.matchMedia('(max-width: 390px)')
+    return window.matchMedia('(max-width: 390px)').matches
   }
 
   return (

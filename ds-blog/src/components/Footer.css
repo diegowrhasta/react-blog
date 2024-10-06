@@ -8,12 +8,12 @@ div.links {
   ul {
     list-style: none;
     display: flex;
-    flex-direction: column;
     gap: 15px;
 
     @media (max-width: 390px) {
       align-items: center;
       justify-content: center;
+      flex-direction: column;
     }
 
     li {
