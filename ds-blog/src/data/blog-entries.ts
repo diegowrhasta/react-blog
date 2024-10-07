@@ -25,53 +25,21 @@ const LABEL_ENTRIES: Record<string, LabelInterface> = {
   }
 } as const
 
-const ENTRY_DATA: Array<EntryInterface> = [
-  {
-    id: 'blog-1',
-    author: 'Olivia Rhye',
-    date: new Date('2023-01-01'),
-    labels: [
-      LABEL_ENTRIES['label-1'],
-      LABEL_ENTRIES['label-2'],
-      LABEL_ENTRIES['label-3'],
-      LABEL_ENTRIES['label-4']
-    ],
-    previewText:
-      'How do you create compelling presentations that wow your colleagues and impress your managers?',
-    text: 'How do you create compelling presentations that wow your colleagues and impress your managers?',
-    title: 'UX review presentations'
-  },
-  {
-    id: 'blog-2',
-    author: 'Olivia Rhye',
-    date: new Date('2023-01-01'),
-    labels: [LABEL_ENTRIES['label-2']],
-    previewText:
-      'How do you create compelling presentations that wow your colleagues and impress your managers?',
-    text: 'How do you create compelling presentations that wow your colleagues and impress your managers?',
-    title: 'UX review presentations'
-  },
-  {
-    id: 'blog-3',
-    author: 'Olivia Rhye',
-    date: new Date('2023-01-01'),
-    labels: [LABEL_ENTRIES['label-3']],
-    previewText:
-      'How do you create compelling presentations that wow your colleagues and impress your managers?',
-    text: 'How do you create compelling presentations that wow your colleagues and impress your managers?',
-    title: 'UX review presentations'
-  },
-  {
-    id: 'blog-4',
-    author: 'Olivia Rhye',
-    date: new Date('2023-01-01'),
-    labels: [LABEL_ENTRIES['label-4']],
-    previewText:
-      'How do you create compelling presentations that wow your colleagues and impress your managers?',
-    text: 'How do you create compelling presentations that wow your colleagues and impress your managers?',
-    title: 'UX review presentations'
-  }
-] as const
+const DUMMY_ENTRY: EntryInterface = {
+  id: 'DUMMY-1',
+  author: 'Olivia Rhye',
+  date: new Date('2023-01-01'),
+  labels: [
+    LABEL_ENTRIES['label-1'],
+    LABEL_ENTRIES['label-2'],
+    LABEL_ENTRIES['label-3'],
+    LABEL_ENTRIES['label-4']
+  ],
+  previewText:
+    'How do you create compelling presentations that wow your colleagues and impress your managers?',
+  text: 'How do you create compelling presentations that wow your colleagues and impress your managers?',
+  title: 'UX review presentations'
+} as const
 
 let _data: EntryInterface[] | undefined = undefined
 
@@ -97,7 +65,7 @@ function createRandomEntry (): EntryInterface {
 
 function generateMockData () {
   _data = []
-  const randomLength = Math.floor(Math.random() * 15) + 5
+  const randomLength = Math.floor(Math.random() * 15) + 1
 
   for (let i = 0; i < randomLength; i++) {
     _data.push(createRandomEntry())
@@ -122,4 +90,4 @@ function getBlogEntry (id: string) {
   return _data?.find(x => x.id === id)
 }
 
-export { getData as getMockData, LABEL_ENTRIES, ENTRY_DATA, getBlogEntry }
+export { getData as getMockData, LABEL_ENTRIES, DUMMY_ENTRY, getBlogEntry }

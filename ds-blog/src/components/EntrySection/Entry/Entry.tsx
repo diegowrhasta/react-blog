@@ -1,9 +1,9 @@
 import { Tag } from './Tag/Tag'
 
-import { EntryInterface } from '../../../data'
+import { type EntryInterface } from '../../../data'
 import * as dateUtils from '../../../utils/date'
 import './Entry.css'
-import { ENTRY_TYPES } from '../../../constants'
+import { type ENTRY_TYPES } from '../../../constants'
 import { useBlogDetailStore } from '../../../store'
 import { useNavigate } from 'react-router-dom'
 
@@ -12,6 +12,8 @@ interface EntryProps extends EntryInterface {
 }
 
 type EntryTypes = typeof ENTRY_TYPES[keyof typeof ENTRY_TYPES]
+
+const DUMMY_ID = 'DUMMY-1'
 
 function Entry (props: EntryProps) {
   const navigate = useNavigate()
@@ -31,11 +33,15 @@ function Entry (props: EntryProps) {
     navigate(`/entry/${props.id}`)
   }
 
+  function isSkeletonEntry (id: string) {
+    return id === DUMMY_ID ? 'skeleton' : ''
+  }
+
   return (
     <div
       onClick={onEntryClick}
       key={props.id}
-      className={`entry ${coalescedType}`}
+      className={`entry ${coalescedType} ${isSkeletonEntry(props.id)}`}
     >
       {entry}
     </div>
@@ -50,10 +56,12 @@ function getEntryType (
     case 'medium-picture-top':
       return (
         <>
-          <img
-            src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
-            alt='desktop'
-          />
+          <div className='image-container'>
+            <img
+              src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              alt='desktop'
+            />
+          </div>
           <label className='main-details'>{`${author} • ${dateUtils.dateToShortString(
             date
           )}`}</label>
@@ -65,10 +73,12 @@ function getEntryType (
     case 'small-picture-left':
       return (
         <>
-          <img
-            src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
-            alt='desktop'
-          />
+          <div className='image-container'>
+            <img
+              src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              alt='desktop'
+            />
+          </div>
           <section className='text'>
             <label className='main-details'>{`${author} • ${dateUtils.dateToShortString(
               date
@@ -82,10 +92,12 @@ function getEntryType (
     case 'medium-picture-left':
       return (
         <>
-          <img
-            src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
-            alt='desktop'
-          />
+          <div className='image-container'>
+            <img
+              src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              alt='desktop'
+            />
+          </div>
           <section className='text'>
             <label className='main-details'>{`${author} • ${dateUtils.dateToShortString(
               date
@@ -99,10 +111,12 @@ function getEntryType (
     case 'big-picture-top':
       return (
         <>
-          <img
-            src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
-            alt='desktop'
-          />
+          <div className='image-container'>
+            <img
+              src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              alt='desktop'
+            />
+          </div>
           <label className='main-details'>{`${author} • ${dateUtils.dateToShortString(
             date
           )}`}</label>
@@ -114,10 +128,12 @@ function getEntryType (
     default:
       return (
         <>
-          <img
-            src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
-            alt='desktop'
-          />
+          <div className='image-container'>
+            <img
+              src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              alt='desktop'
+            />
+          </div>
           <label className='main-details'>{`${author} • ${dateUtils.dateToShortString(
             date
           )}`}</label>

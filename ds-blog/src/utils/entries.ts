@@ -1,3 +1,4 @@
+import { DUMMY_ENTRY } from '../data'
 import { EntryInterface } from '../data/entry.interface'
 
 declare global {
@@ -17,7 +18,13 @@ const PAGINATOR_CONFIG: { pageSize: number } = {
 
 function calculateRecentEntries (entries: EntryInterface[]) {
   const upperLimitCalculator = entries.length < 4 ? entries.length : 4
-  return entries.slice(0, upperLimitCalculator)
+  const slicedEntries = entries.slice(0, upperLimitCalculator)
+
+  while (slicedEntries.length < 4) {
+    slicedEntries.push(DUMMY_ENTRY)
+  }
+
+  return slicedEntries
 }
 
 function getPageNumber (entriesLength: number) {
@@ -27,10 +34,7 @@ function getPageNumber (entriesLength: number) {
 function getPageEntries (entries: EntryInterface[], pageNumber: number) {
   const baseIndex = (pageNumber - 1) * PAGINATOR_CONFIG.pageSize
 
-  return entries.slice(
-    baseIndex,
-    baseIndex + PAGINATOR_CONFIG.pageSize
-  )
+  return entries.slice(baseIndex, baseIndex + PAGINATOR_CONFIG.pageSize)
 }
 
 export {
