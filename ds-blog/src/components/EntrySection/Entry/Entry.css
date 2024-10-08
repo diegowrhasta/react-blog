@@ -155,14 +155,17 @@ div.all-container {
       display: flex;
       flex-direction: column;
       flex: 1 1 calc(33.33% - 18px);
+      max-width: calc(33.33% - 18px);
       gap: 24px;
 
       @media (max-width: 834px) {
         flex: 1 1 calc(50% - 18px);
+        max-width: calc(50% - 18px);
       }
 
       @media (max-width: 390px) {
         flex: 1 1 calc(100% - 18px);
+        max-width: calc(100% - 18px);
       }
 
       div.image-container {
