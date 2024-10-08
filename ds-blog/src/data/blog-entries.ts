@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker'
 
 import { EntryInterface, LabelInterface } from './entry.interface'
+import { getConfig } from '../services'
 
 const LABEL_ENTRIES: Record<string, LabelInterface> = {
   'label-1': {
@@ -41,11 +42,26 @@ const DUMMY_ENTRY: EntryInterface = {
   title: 'UX review presentations'
 } as const
 
+const BLOG_ENTRIES: EntryInterface[] = [
+  {
+    id: '70e2c51a-f70f-4df5-9cb8-bc4b88260888',
+    author: 'Diego Balderrama',
+    date: new Date('2024-10-08T12:38:00'),
+    labels: [LABEL_ENTRIES['label-3'], LABEL_ENTRIES['label-4']],
+    previewText: "What's software and its development to me?",
+    title: 'Software, Pragmatism and Epistemology'
+  }
+] as const
+
 let _data: EntryInterface[] | undefined = undefined
 
 function getData () {
   if (!_data) {
-    generateMockData()
+    if (getConfig().mockMode) {
+      generateMockData()
+    } else {
+      loadEntries()
+    }
   }
 
   return _data
@@ -61,6 +77,10 @@ function createRandomEntry (): EntryInterface {
     text: faker.lorem.paragraphs(3),
     title: faker.lorem.words(3)
   }
+}
+
+function loadEntries () {
+  _data = BLOG_ENTRIES
 }
 
 function generateMockData () {
@@ -90,4 +110,4 @@ function getBlogEntry (id: string) {
   return _data?.find(x => x.id === id)
 }
 
-export { getData as getMockData, LABEL_ENTRIES, DUMMY_ENTRY, getBlogEntry }
+export { getData, LABEL_ENTRIES, DUMMY_ENTRY, getBlogEntry }

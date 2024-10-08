@@ -9,7 +9,7 @@ export interface EntryInterface {
   author: string
   date: Date
   title: string
-  text: string
+  text?: string
   previewText: string
   labels: Array<LabelInterface>
 }

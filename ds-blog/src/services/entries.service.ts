@@ -1,4 +1,4 @@
-import { EntryInterface, getMockData } from '../data'
+import { EntryInterface, getData } from '../data'
 import * as entriesUtils from '../utils/entries'
 
 const INITIAL_PAGE = 1
@@ -10,7 +10,7 @@ function loadEntries (
     currentPage: number
   ) => void
 ) {
-  const entryData = getMockData()!.sortEntriesDesc()
+  const entryData = getData()!.sortEntriesDesc()
   const currentPageEntries = entriesUtils.getPageEntries(entryData, INITIAL_PAGE)
 
   updateAllEntries(entryData, currentPageEntries, INITIAL_PAGE)
