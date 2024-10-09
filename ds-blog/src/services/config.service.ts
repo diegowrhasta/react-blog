@@ -10,7 +10,8 @@ const _CONFIG: ConfigInterface = {
 
 function getConfig () {
   if (!_CONFIG.initialized) {
-    _CONFIG.mockMode = import.meta.env.VITE_APP_MODE_MOCK
+    _CONFIG.mockMode = import.meta.env.VITE_APP_MOCK_MODE
+    _CONFIG.initialized = true
   }
 
   return _CONFIG
