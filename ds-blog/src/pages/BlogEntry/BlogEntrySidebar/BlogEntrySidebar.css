@@ -4,4 +4,13 @@ div {
     flex-direction: column;
     gap: 8px;
   }
+
+  span {
+    &.no-entries {
+      font-style: italic;
+      font-weight: 500;
+      padding-top: 24px;
+      text-align: center;
+    }
+  }
 }
