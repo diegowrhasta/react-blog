@@ -11,6 +11,7 @@ import './App.css'
 import { useGlobalStore } from './store'
 import { useEffect } from 'react'
 import * as scrollUtils from './utils/scroll'
+import { EntriesGuard } from './router/entries.guard'
 
 function App () {
   const setScrollToBottom = useGlobalStore(state => state.setScrollToBottom)
@@ -41,9 +42,23 @@ function App () {
         <Title></Title>
         <main>
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route
+              path='/'
+              element={
+                <EntriesGuard>
+                  <Home />
+                </EntriesGuard>
+              }
+            />
             <Route path='/about' element={<About />} />
-            <Route path='/entry/:id' element={<BlogEntry />} />
+            <Route
+              path='/entry/:id'
+              element={
+                <EntriesGuard>
+                  <BlogEntry />
+                </EntriesGuard>
+              }
+            />
           </Routes>
         </main>
         <footer>

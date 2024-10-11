@@ -6,7 +6,6 @@ import * as entriesUtils from '../utils/entries'
 import { useAllEntriesStore, useGlobalStore } from '../store'
 import './Home.css'
 import { EntryInterface } from '../data'
-import { loadEntries } from '../services'
 
 const homeTitle = 'THE BLOG'
 
@@ -21,7 +20,6 @@ function Home () {
     state => state.currentPageEntries
   )
   const allEntries = useAllEntriesStore(state => state.allEntries)
-  const updateAllEntries = useAllEntriesStore(state => state.updateAllEntries)
   const updateCurrentPageState = useAllEntriesStore(
     state => state.updateCurrentPageState
   )
@@ -29,14 +27,6 @@ function Home () {
   useEffect(() => {
     setTitle(homeTitle)
   }, [setTitle])
-
-  useEffect(() => {
-    if (allEntries.length !== 0) {
-      return
-    }
-
-    loadEntries(updateAllEntries)
-  }, [updateAllEntries, allEntries])
 
   useEffect(() => {
     if (!calculatingNewPage) {
