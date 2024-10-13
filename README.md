@@ -10,8 +10,7 @@ This is a project that ports the entire design from Figma referenced in the _Int
 section, but also adds a distinct flavor to it, by extra additions such as animations, 
 hovers, and overall the implementation of the design with good practices such as 
 folder structure, style and component files, reusable components inspired by 
-VSA (Vertical Slice Architecture), the implementation of a really simple store 
-with _Elf.js_ and its observables capabitilies _(rxjs)_.
+VSA (Vertical Slice Architecture).
 
 Other things worth of note is the aim for clean and redable code, thanks to the 
 already built-in eslint configuration from Vue as well as the usage of the __StandardJS__
