@@ -37,10 +37,12 @@ Things as:
 - Typescript Barrels
 - Vertical Slice Architecture (for folder structure)
 - CSS global variables for easy swap out of color palette (dark mode enablement)
-- 
+- Route guards
+- Env variables (with service)
+- Mock mode and production mode
 
 ## Libraries Used
 
-- Elf.js
 - Zustand
 - React Router
+- Faker
