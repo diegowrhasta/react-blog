@@ -48,6 +48,8 @@ const BLOG_ENTRIES: EntryInterface[] = [
     author: 'Diego Balderrama',
     date: new Date('2024-10-08T12:38:00'),
     labels: [LABEL_ENTRIES['label-3'], LABEL_ENTRIES['label-4']],
+    previewImage:
+      'https://www.corporatevision-news.com/wp-content/uploads/2022/04/Software-Development.jpg',
     previewText: "What's software and its development to me?",
     title: 'Software, Pragmatism and Epistemology'
   }

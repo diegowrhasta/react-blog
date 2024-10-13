@@ -10,6 +10,7 @@ export interface EntryInterface {
   date: Date
   title: string
   text?: string
+  previewImage?: string
   previewText: string
   labels: Array<LabelInterface>
 }

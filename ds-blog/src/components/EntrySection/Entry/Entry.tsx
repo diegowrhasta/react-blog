@@ -49,7 +49,7 @@ function Entry (props: EntryProps) {
 }
 
 function getEntryType (
-  { author, date, title, previewText, type }: EntryProps,
+  { author, date, title, previewText, type, previewImage }: EntryProps,
   tags: JSX.Element[]
 ) {
   switch (type) {
@@ -58,7 +58,10 @@ function getEntryType (
         <>
           <div className='image-container'>
             <img
-              src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              src={
+                previewImage ??
+                'https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              }
               alt='desktop'
             />
           </div>
@@ -75,7 +78,10 @@ function getEntryType (
         <>
           <div className='image-container'>
             <img
-              src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              src={
+                previewImage ??
+                'https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              }
               alt='desktop'
             />
           </div>
@@ -94,7 +100,10 @@ function getEntryType (
         <>
           <div className='image-container'>
             <img
-              src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              src={
+                previewImage ??
+                'https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              }
               alt='desktop'
             />
           </div>
@@ -113,7 +122,10 @@ function getEntryType (
         <>
           <div className='image-container'>
             <img
-              src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              src={
+                previewImage ??
+                'https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              }
               alt='desktop'
             />
           </div>
@@ -130,7 +142,10 @@ function getEntryType (
         <>
           <div className='image-container'>
             <img
-              src='https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              src={
+                previewImage ??
+                'https://i.blogs.es/89b87a/dell-equipo/450_1000.jpg'
+              }
               alt='desktop'
             />
           </div>
