@@ -1,10 +1,8 @@
 # Introduction
 
-Project in React which was ported entirely from scratch from a design: 
-(The Personal Blog)[https://www.figma.com/community/file/1235152009438565697]. 
-This was done alongside Vite as a bundler, one that has a fast Rust compiler, with 
-modern features and overall a better experience than create react app or other 
-options.
+Project in React which was ported entirely from scratch from a design: [The Blog](https://www.figma.com/community/file/1235152009438565697)
+This was done alongside Vite as a bundler, one that has a fast Rust compiler, with modern 
+features and overall a better experience than create react app or other options.
 
 ## Summary
 
