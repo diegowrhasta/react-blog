@@ -27,7 +27,11 @@ function HamburgerButton ({
   }
 
   return (
-    <button onClick={() => onShowOverlayClick()} id='hamburger'>
+    <button
+      aria-label='Hamburger Button'
+      onClick={() => onShowOverlayClick()}
+      id='hamburger'
+    >
       <svg
         width='32'
         height='32'

@@ -18,7 +18,11 @@ function ModeButton ({ onClick }: ModeButtonProps) {
   }
 
   return (
-    <button className='mode-button' onClick={onModeChange}>
+    <button
+      aria-label='Mode Button'
+      className='mode-button'
+      onClick={onModeChange}
+    >
       <ModeIcon mode={mode} />
     </button>
   )
