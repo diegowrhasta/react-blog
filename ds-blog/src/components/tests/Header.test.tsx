@@ -19,7 +19,6 @@ test('header has correct author, options and button', () => {
   expect(navigationOptions).toHaveLength(4)
   expect(optionsText).toEqual(['Home', 'Recent', 'All', 'About'])
 
-  screen.debug()
   const componentButtons = screen.getAllByRole('button')
   const modeButton = screen.getByRole('button', { name: /Mode Button/i })
   expect(componentButtons).toHaveLength(2)
