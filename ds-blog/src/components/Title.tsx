@@ -5,5 +5,5 @@ import './Title.css'
 export function Title () {
   const title = useGlobalStore(state => state.title)
 
-  return <div className='title'>{title}</div>
+  return <h1 className='title'>{title}</h1>
 }

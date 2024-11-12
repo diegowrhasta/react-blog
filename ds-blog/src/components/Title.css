@@ -1,11 +1,11 @@
-div.title {
+h1.title {
   border-top: var(--title-border-color);
   border-bottom: var(--title-border-color);
   font-weight: 700;
   font-size: 15.25rem;
   text-align: center;
 
-  @media(max-width: 390px) {
+  @media (max-width: 390px) {
     font-size: 4.2rem;
   }
 }
