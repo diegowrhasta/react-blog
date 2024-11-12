@@ -1,6 +1,6 @@
 const SCROLL_TIMEOUT = 50
 
-let scrollTimeout: number
+let scrollTimeout: NodeJS.Timeout
 
 function scrollToBottom () {
   window.scrollTo(0, document.body.scrollHeight)

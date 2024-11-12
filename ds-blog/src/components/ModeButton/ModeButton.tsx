@@ -20,7 +20,7 @@ function ModeButton ({ onClick }: ModeButtonProps) {
   return (
     <button
       aria-label='Mode Button'
-      className='mode-button'
+      className={`mode-button ${mode}`}
       onClick={onModeChange}
     >
       <ModeIcon mode={mode} />
