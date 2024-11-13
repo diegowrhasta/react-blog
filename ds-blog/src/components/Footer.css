@@ -26,6 +26,14 @@ div.links {
           border-bottom: var(--border-color);
         }
       }
+
+      a {
+        &:link,
+        &:visited {
+          color: var(--font-color);
+          text-decoration: none;
+        }
+      }
     }
   }
 }
