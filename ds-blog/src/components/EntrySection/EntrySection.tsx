@@ -31,19 +31,27 @@ function EntrySection ({
       return <Entry key={entry.id} {...entry} />
     })
 
-    return <div className='entry-container all-container'>{genericEntries}</div>
+    return (
+      <div
+        role='region'
+        aria-label='All Entries'
+        className='entry-container all-container'
+      >
+        {genericEntries}
+      </div>
+    )
   }
 
   function getRecentLayout (entries: EntryInterface[]) {
-    return getRecentLayoutForScreen(entries)
-  }
-
-  function getRecentLayoutForScreen (entries: EntryInterface[]) {
     const phoneWindow = window.matchMedia('(max-width: 390px)')
 
     if (phoneWindow.matches) {
       return (
-        <div className='entry-container recent-mobile-container'>
+        <div
+          role='region'
+          aria-label='Recent Entries'
+          className='entry-container recent-mobile-container'
+        >
           <Entry type={getRecentEntryType(0)} {...entries[0]} />
           <Entry type={getRecentEntryType(1)} {...entries[1]} />
           <Entry type={getRecentEntryType(2)} {...entries[2]} />
@@ -56,7 +64,11 @@ function EntrySection ({
 
     if (ipadWindow.matches) {
       return (
-        <div className='entry-container recent-ipad-container'>
+        <div
+          role='region'
+          aria-label='Recent Entries'
+          className='entry-container recent-ipad-container'
+        >
           <div className='first-row'>
             <Entry type={getRecentEntryType(0)} {...entries[0]} />
           </div>
@@ -72,7 +84,11 @@ function EntrySection ({
     }
 
     return (
-      <div className='entry-container recent-desktop-container'>
+      <div
+        role='region'
+        aria-label='Recent Entries'
+        className='entry-container recent-desktop-container'
+      >
         <div className='first-row'>
           <Entry type={getRecentEntryType(0)} {...entries[0]} />
           <div className='stacked-entries'>

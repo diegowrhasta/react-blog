@@ -24,7 +24,7 @@ function Entry (props: EntryProps) {
   })
 
   const entry = getEntryType(props, tags)
-  const coalescedType = props.type ? props.type : 'small-picture-top'
+  const coalescedType = props.type || 'small-picture-top'
 
   function onEntryClick (event: React.MouseEvent<HTMLDivElement>) {
     event.stopPropagation()
