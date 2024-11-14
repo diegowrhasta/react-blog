@@ -1,10 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { ViteUserConfig } from 'vitest/config'
-import path from 'path'
-import { fileURLToPath } from 'url'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -22,10 +18,8 @@ export default defineConfig({
   resolve: {
     alias: {
       // Create an alias for the testing utility
-      'testing-library-utils': path.resolve(
-        __dirname,
-        'src/test-utils/testing-library-utils.tsx'
-      )
+      'testing-library-utils': '/src/test-utils/testing-library-utils.tsx',
+      src: '/src'
     }
   }
 } as ViteUserConfig)

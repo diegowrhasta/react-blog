@@ -38,18 +38,19 @@ function Entry (props: EntryProps) {
   }
 
   return (
-    <div
+    <article
+      aria-labelledby={`title-${props.id}`}
       onClick={onEntryClick}
       key={props.id}
       className={`entry ${coalescedType} ${isSkeletonEntry(props.id)}`}
     >
       {entry}
-    </div>
+    </article>
   )
 }
 
 function getEntryType (
-  { author, date, title, previewText, type, previewImage }: EntryProps,
+  { id, author, date, title, previewText, type, previewImage }: EntryProps,
   tags: JSX.Element[]
 ) {
   switch (type) {
@@ -68,7 +69,9 @@ function getEntryType (
           <label className='main-details'>{`${author} • ${dateUtils.dateToShortString(
             date
           )}`}</label>
-          <span className='title'>{title}</span>
+          <h2 id={`title-${id}`} className='title'>
+            {title}
+          </h2>
           <div className='text-preview'>{previewText}</div>
           <span className='labels'>{tags}</span>
         </>
@@ -89,7 +92,7 @@ function getEntryType (
             <label className='main-details'>{`${author} • ${dateUtils.dateToShortString(
               date
             )}`}</label>
-            <span className='title'>{title}</span>
+            <h2 className='title'>{title}</h2>
             <div className='text-preview'>{previewText}</div>
             <span className='labels'>{tags}</span>
           </section>
@@ -111,7 +114,9 @@ function getEntryType (
             <label className='main-details'>{`${author} • ${dateUtils.dateToShortString(
               date
             )}`}</label>
-            <span className='title'>{title}</span>
+            <h2 id={`title-${id}`} className='title'>
+              {title}
+            </h2>
             <div className='text-preview'>{previewText}</div>
             <span className='labels'>{tags}</span>
           </section>
@@ -132,7 +137,9 @@ function getEntryType (
           <label className='main-details'>{`${author} • ${dateUtils.dateToShortString(
             date
           )}`}</label>
-          <span className='title'>{title}</span>
+          <h2 id={`title-${id}`} className='title'>
+            {title}
+          </h2>
           <div className='text-preview'>{previewText}</div>
           <span className='labels'>{tags}</span>
         </>
@@ -152,7 +159,9 @@ function getEntryType (
           <label className='main-details'>{`${author} • ${dateUtils.dateToShortString(
             date
           )}`}</label>
-          <span className='title'>{title}</span>
+          <h2 id={`title-${id}`} className='title'>
+            {title}
+          </h2>
           <div className='text-preview'>{previewText}</div>
           <span className='labels'>{tags}</span>
         </>

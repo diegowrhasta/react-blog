@@ -26,7 +26,7 @@ div.entry-section-container {
         display: flex;
         gap: 32px;
 
-        div:first-child.entry {
+        article:first-child.entry {
           flex: 1 1 50%;
         }
 

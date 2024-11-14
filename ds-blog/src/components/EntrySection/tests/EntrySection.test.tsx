@@ -1,6 +1,7 @@
 import { render, screen } from 'testing-library-utils'
 
 import { EntrySection } from '../EntrySection'
+import { DUMMY_ENTRY, type EntryInterface } from 'src/data'
 
 const setMatcher = ({
   queryToMatch,
@@ -74,6 +75,33 @@ describe('all entries', () => {
       name: /All Entries/i
     })
     expect(allContainer).toHaveClass('entry-container all-container')
+  })
+
+  test('entries follow accesible properties', () => {
+    const mockEntries: EntryInterface[] = [DUMMY_ENTRY]
+    render(
+      <EntrySection
+        id='all'
+        data={mockEntries}
+        pageNumber={0}
+        pageSize={10}
+        titleName='All blog posts'
+        isAllType
+      />
+    )
+
+    const articleElements = screen.getAllByRole('article', {
+      name: /UX review presentations/i
+    })
+    const ariaLabelIds = articleElements.map(element =>
+      element.getAttribute('aria-labelledby')
+    )
+    const labelEntry = screen.getByRole('heading', {
+      name: /UX review presentations/i
+    }).id
+    expect(articleElements).toHaveLength(1)
+    expect(ariaLabelIds).toEqual(['title-DUMMY-1'])
+    expect(labelEntry).toBe('title-DUMMY-1')
   })
 })
 
