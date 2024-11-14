@@ -60,7 +60,7 @@ describe('all entries', () => {
     expect(allContainer).toHaveClass('entry-container all-container')
     unmount()
 
-    setMatcher({ queryToMatch: '', passMatch: true })
+    setMatcher({ queryToMatch: '(max-width: 1920px)' })
     ;({ unmount } = render(
       <EntrySection
         id='all'
