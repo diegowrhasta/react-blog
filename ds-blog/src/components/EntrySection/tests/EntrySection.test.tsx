@@ -96,12 +96,12 @@ describe('all entries', () => {
     const ariaLabelIds = articleElements.map(element =>
       element.getAttribute('aria-labelledby')
     )
-    const labelEntry = screen.getByRole('heading', {
+    const labelEntryId = screen.getByRole('heading', {
       name: /UX review presentations/i
     }).id
     expect(articleElements).toHaveLength(1)
     expect(ariaLabelIds).toEqual(['title-DUMMY-1'])
-    expect(labelEntry).toBe('title-DUMMY-1')
+    expect(labelEntryId).toBe('title-DUMMY-1')
   })
 })
 
