@@ -37,9 +37,11 @@ describe('all entries', () => {
     )
 
     let allContainer = screen.getByRole('region', {
-      name: /All Entries/i
+      name: /All blog posts/i
     })
-    expect(allContainer).toHaveClass('entry-container all-container')
+    let allList = screen.getByRole('list', { name: /All Entries List/i })
+    expect(allContainer).toBeInTheDocument()
+    expect(allList).toHaveClass('entry-container all-container')
     unmount()
 
     setMatcher({ queryToMatch: '(max-width: 834px)' })
@@ -55,9 +57,11 @@ describe('all entries', () => {
     ))
 
     allContainer = screen.getByRole('region', {
-      name: /All Entries/i
+      name: /All blog posts/i
     })
-    expect(allContainer).toHaveClass('entry-container all-container')
+    allList = screen.getByRole('list', { name: /All Entries List/i })
+    expect(allContainer).toBeInTheDocument()
+    expect(allList).toHaveClass('entry-container all-container')
     unmount()
 
     setMatcher({ queryToMatch: '(max-width: 1920px)' })
@@ -72,9 +76,11 @@ describe('all entries', () => {
       />
     ))
     allContainer = screen.getByRole('region', {
-      name: /All Entries/i
+      name: /All blog posts/i
     })
-    expect(allContainer).toHaveClass('entry-container all-container')
+    allList = screen.getByRole('list', { name: /All Entries List/i })
+    expect(allContainer).toBeInTheDocument()
+    expect(allList).toHaveClass('entry-container all-container')
   })
 
   test('entries follow accesible properties', () => {
@@ -119,11 +125,13 @@ describe('recent entries', () => {
     )
 
     const recentContainer = screen.getByRole('region', {
-      name: /Recent Entries/i
+      name: /Recent blog posts/i
     })
-    expect(recentContainer).toHaveClass(
-      'entry-container recent-mobile-container'
-    )
+    const recentList = screen.getByRole('list', {
+      name: /Recent Entries List/i
+    })
+    expect(recentContainer).toBeInTheDocument()
+    expect(recentList).toHaveClass('entry-container recent-mobile-container')
   })
 
   test('ipad screen size has specific layout', () => {
@@ -139,9 +147,13 @@ describe('recent entries', () => {
     )
 
     const recentContainer = screen.getByRole('region', {
-      name: /Recent Entries/i
+      name: /Recent blog posts/i
     })
-    expect(recentContainer).toHaveClass('entry-container recent-ipad-container')
+    const recentList = screen.getByRole('list', {
+      name: /Recent Entries List/i
+    })
+    expect(recentContainer).toBeInTheDocument()
+    expect(recentList).toHaveClass('entry-container recent-ipad-container')
   })
 
   test('desktop screen size has specific layout', () => {
@@ -157,10 +169,12 @@ describe('recent entries', () => {
     )
 
     const recentContainer = screen.getByRole('region', {
-      name: /Recent Entries/i
+      name: /Recent blog posts/i
     })
-    expect(recentContainer).toHaveClass(
-      'entry-container recent-desktop-container'
-    )
+    const recentList = screen.getByRole('list', {
+      name: /Recent Entries List/i
+    })
+    expect(recentContainer).toBeInTheDocument()
+    expect(recentList).toHaveClass('entry-container recent-desktop-container')
   })
 })

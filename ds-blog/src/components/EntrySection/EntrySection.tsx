@@ -25,6 +25,7 @@ function EntrySection ({
   const allType = !!isAllType
 
   const container = allType ? getAllLayout(data) : getRecentLayout(data)
+  const sectionId = allType ? 'all-region' : 'recent-region'
 
   function getAllLayout (entries: EntryInterface[]) {
     const genericEntries = entries.map(entry => {
@@ -33,8 +34,8 @@ function EntrySection ({
 
     return (
       <div
-        role='region'
-        aria-label='All Entries'
+        role='list'
+        aria-label='All Entries List'
         className='entry-container all-container'
       >
         {genericEntries}
@@ -44,31 +45,25 @@ function EntrySection ({
 
   function getRecentLayout (entries: EntryInterface[]) {
     const phoneWindow = window.matchMedia('(max-width: 390px)')
+    const ipadWindow = window.matchMedia('(max-width: 834px)')
+
+    let layoutElements: JSX.Element
+    let containerClass = ''
 
     if (phoneWindow.matches) {
-      return (
-        <div
-          role='region'
-          aria-label='Recent Entries'
-          className='entry-container recent-mobile-container'
-        >
+      containerClass = 'recent-mobile-container'
+      layoutElements = (
+        <>
           <Entry type={getRecentEntryType(0)} {...entries[0]} />
           <Entry type={getRecentEntryType(1)} {...entries[1]} />
           <Entry type={getRecentEntryType(2)} {...entries[2]} />
           <Entry type={getRecentEntryType(3)} {...entries[3]} />
-        </div>
+        </>
       )
-    }
-
-    const ipadWindow = window.matchMedia('(max-width: 834px)')
-
-    if (ipadWindow.matches) {
-      return (
-        <div
-          role='region'
-          aria-label='Recent Entries'
-          className='entry-container recent-ipad-container'
-        >
+    } else if (ipadWindow.matches) {
+      containerClass = 'recent-ipad-container'
+      layoutElements = (
+        <>
           <div className='first-row'>
             <Entry type={getRecentEntryType(0)} {...entries[0]} />
           </div>
@@ -79,26 +74,33 @@ function EntrySection ({
           <div className='last-item'>
             <Entry type={getRecentEntryType(3)} {...entries[3]} />
           </div>
-        </div>
+        </>
+      )
+    } else {
+      containerClass = 'recent-desktop-container'
+      layoutElements = (
+        <>
+          <div className='first-row'>
+            <Entry type={getRecentEntryType(0)} {...entries[0]} />
+            <div className='stacked-entries'>
+              <Entry type={getRecentEntryType(1)} {...entries[1]} />
+              <Entry type={getRecentEntryType(2)} {...entries[2]} />
+            </div>
+          </div>
+          <div className='last-item'>
+            <Entry type={getRecentEntryType(3)} {...entries[3]} />
+          </div>
+        </>
       )
     }
 
     return (
       <div
-        role='region'
-        aria-label='Recent Entries'
-        className='entry-container recent-desktop-container'
+        role='list'
+        aria-label='Recent Entries List'
+        className={`entry-container ${containerClass}`}
       >
-        <div className='first-row'>
-          <Entry type={getRecentEntryType(0)} {...entries[0]} />
-          <div className='stacked-entries'>
-            <Entry type={getRecentEntryType(1)} {...entries[1]} />
-            <Entry type={getRecentEntryType(2)} {...entries[2]} />
-          </div>
-        </div>
-        <div className='last-item'>
-          <Entry type={getRecentEntryType(3)} {...entries[3]} />
-        </div>
+        {layoutElements}
       </div>
     )
   }
@@ -140,11 +142,17 @@ function EntrySection ({
   }
 
   return (
-    <div id={id} className='entry-section-container'>
-      <span className='title'>{titleName}</span>
+    <section
+      id={id}
+      className='entry-section-container'
+      aria-labelledby={`title-${sectionId}`}
+    >
+      <h2 id={`title-${sectionId}`} className='section-title'>
+        {titleName}
+      </h2>
       {container}
       {allType && <Paginator pageNumber={pageNumber!} pageSize={pageSize!} />}
-    </div>
+    </section>
   )
 }
 
