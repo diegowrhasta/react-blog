@@ -192,4 +192,53 @@ describe('recent entries', () => {
     const entries = screen.queryAllByRole('article')
     expect(entries).toHaveLength(0)
   })
+
+  test('passing skeleton tagged entries should render skeleton items', () => {
+    const data = Array(4).fill(DUMMY_ENTRY)
+    const { unmount } = render(
+      <EntrySection
+        id='all'
+        data={data}
+        pageNumber={0}
+        pageSize={10}
+        titleName='Recent blog posts'
+      />
+    )
+
+    let entries = screen.queryAllByRole('article')
+    expect(entries).toHaveLength(4)
+    entries.forEach(entry => {
+      expect(entry).toHaveClass('skeleton')
+    })
+    unmount()
+
+    let skeletonEntries = 0
+    let nonSkeletonEntries = 0
+    const firstHalf = Array(2).fill(DUMMY_ENTRY)
+    const secondHalf = Array(2).fill({
+      ...DUMMY_ENTRY,
+      id: '70e2c51a-f70f-4df5-9cb8-bc4b88260888'
+    })
+    render(
+      <EntrySection
+        id='all'
+        data={[...firstHalf, ...secondHalf]}
+        pageNumber={0}
+        pageSize={10}
+        titleName='Recent blog posts'
+      />
+    )
+
+    entries = screen.queryAllByRole('article')
+    expect(entries).toHaveLength(4)
+    entries.forEach(entry => {
+      if (entry.className.includes('skeleton')) {
+        skeletonEntries++
+      } else {
+        nonSkeletonEntries++
+      }
+    })
+    expect(skeletonEntries).toBe(2)
+    expect(nonSkeletonEntries).toBe(2)
+  })
 })
