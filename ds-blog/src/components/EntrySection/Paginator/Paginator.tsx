@@ -10,7 +10,6 @@ const PAGE_DIRECTIONS = {
 
 interface PaginatorProps {
   pageNumber: number
-  pageSize: number
 }
 
 function Paginator ({ pageNumber }: PaginatorProps) {
@@ -25,9 +24,14 @@ function Paginator ({ pageNumber }: PaginatorProps) {
   }, [selectedPage, updateNewPageCalculation])
 
   return (
-    <div className='paginator-container'>
+    <div
+      role='navigation'
+      aria-label='All Entries Pagination Controls'
+      className='paginator-container'
+    >
       <span className='page-section previous-section'>
         <button
+          aria-label='Go to previous page'
           onClick={() =>
             onPageChange(
               PAGE_DIRECTIONS.previousPage,
@@ -65,6 +69,7 @@ function Paginator ({ pageNumber }: PaginatorProps) {
       </span>
       <span className='page-section next-section'>
         <button
+          aria-label='Go to next page'
           onClick={() =>
             onPageChange(
               PAGE_DIRECTIONS.nextPage,
@@ -121,14 +126,19 @@ function getButtonDistribution (
   }
 
   return pageEntry.map((entry, index) => {
+    const isCurrentPage = calculateIsSelectedPage(selectedPage, entry)
+    const selectedStyle = isCurrentPage ? 'selected' : ''
+    const ariaCurrent = isCurrentPage ? 'page' : undefined
+
     return (
       <div
+        role='button'
         key={`${index}-page`}
-        className={`page-button ${calculateSelectedPage(
-          selectedPage,
+        className={`page-button ${selectedStyle} ${calculateNavigableButton(
           entry
-        )} ${calculateNavigableButton(entry)}`}
+        )}`}
         onClick={() => onPageJump(entry, updatePageFn, setScrollToBottom)}
+        aria-current={ariaCurrent}
       >
         {coalesceButtonText(entry)}
       </div>
@@ -178,8 +188,8 @@ function onPageJump (
   setScrollToBottom(true)
 }
 
-function calculateSelectedPage (selectedPage: number, entry: number) {
-  return selectedPage === entry ? 'selected' : ''
+function calculateIsSelectedPage (selectedPage: number, entry: number) {
+  return selectedPage === entry
 }
 
 function calculateNavigableButton (entry: number) {

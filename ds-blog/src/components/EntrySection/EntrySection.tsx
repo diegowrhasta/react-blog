@@ -10,7 +10,6 @@ interface EntrySectionProps {
   titleName: string | undefined
   isAllType?: boolean
   pageNumber?: number
-  pageSize?: number
   data: EntryInterface[]
 }
 
@@ -18,7 +17,6 @@ function EntrySection ({
   titleName,
   isAllType,
   pageNumber,
-  pageSize,
   data,
   id
 }: EntrySectionProps) {
@@ -164,7 +162,7 @@ function EntrySection ({
         {titleName}
       </h2>
       {container}
-      {allType && <Paginator pageNumber={pageNumber!} pageSize={pageSize!} />}
+      {allType && <Paginator pageNumber={pageNumber!} />}
     </section>
   )
 }

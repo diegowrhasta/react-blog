@@ -55,7 +55,6 @@ function Home () {
         id='all'
         data={currentPageEntries}
         pageNumber={entriesUtils.getPageNumber(allEntries.length)}
-        pageSize={entriesUtils.PAGINATOR_CONFIG.pageSize}
         titleName='All blog posts'
         isAllType
       ></EntrySection>

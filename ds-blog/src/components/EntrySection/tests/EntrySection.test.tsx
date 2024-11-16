@@ -1,7 +1,9 @@
 import { render, screen } from 'testing-library-utils'
+import userEvent from '@testing-library/user-event'
 
 import { EntrySection } from '../EntrySection'
 import { DUMMY_ENTRY, type EntryInterface } from 'src/data'
+import { generateUUID } from 'src/utils'
 
 const setMatcher = ({
   queryToMatch,
@@ -30,7 +32,6 @@ describe('all entries', () => {
         id='all'
         data={[]}
         pageNumber={0}
-        pageSize={10}
         titleName='All blog posts'
         isAllType
       />
@@ -50,7 +51,6 @@ describe('all entries', () => {
         id='all'
         data={[]}
         pageNumber={0}
-        pageSize={10}
         titleName='All blog posts'
         isAllType
       />
@@ -70,7 +70,6 @@ describe('all entries', () => {
         id='all'
         data={[]}
         pageNumber={0}
-        pageSize={10}
         titleName='All blog posts'
         isAllType
       />
@@ -90,7 +89,6 @@ describe('all entries', () => {
         id='all'
         data={mockEntries}
         pageNumber={0}
-        pageSize={10}
         titleName='All blog posts'
         isAllType
       />
@@ -109,9 +107,62 @@ describe('all entries', () => {
     expect(ariaLabelIds).toEqual(['title-DUMMY-1'])
     expect(labelEntryId).toBe('title-DUMMY-1')
   })
+
+  test('paginator is present, with correct accesibility and navigability', async () => {
+    const expectedPageNumber = 2
+    const data = Array(4)
+      .fill(null)
+      .map(() => ({ ...DUMMY_ENTRY, id: generateUUID() }))
+
+    render(
+      <EntrySection
+        id='all'
+        data={data} // We asume this is the data corresponding to the active page on store
+        pageNumber={expectedPageNumber} // The number of pages to render is calulcated upstream
+        titleName='All blog posts'
+        isAllType
+      />
+    )
+
+    const paginator = screen.getByRole('navigation', {
+      name: /All Entries Pagination Controls/i
+    })
+    expect(paginator).toBeInTheDocument()
+
+    const previousButton = screen.getByRole('button', {
+      name: /Go to previous page/i
+    })
+    const nextButton = screen.getByRole('button', { name: /Go to next page/i })
+    expect(previousButton).toBeInTheDocument()
+    expect(nextButton).toBeInTheDocument()
+
+    const defaultCurrentPage = screen.getByRole('button', { name: /1/i })
+    const nonCurrentPage = screen.getByRole('button', { name: /2/i })
+    const allPageButtons = screen
+      .getAllByRole('button')
+      .filter(element => element.className.includes('page-button'))
+    expect(defaultCurrentPage).toBeInTheDocument()
+    expect(defaultCurrentPage).toHaveAttribute('aria-current')
+    expect(nonCurrentPage).not.toHaveAttribute('aria-current')
+    expect(allPageButtons).toHaveLength(expectedPageNumber)
+  })
 })
 
 describe('recent entries', () => {
+  test('paginator is not rendered', () => {
+    render(
+      <EntrySection
+        id='all'
+        data={[]}
+        pageNumber={0}
+        titleName='Recent blog posts'
+      />
+    )
+    const paginator = screen.queryByRole('navigation', {
+      name: /All Entries Pagination Controls/i
+    })
+    expect(paginator).not.toBeInTheDocument()
+  })
   test('mobile screen size has specific layout', () => {
     setMatcher({ queryToMatch: '(max-width: 390px)' })
     render(
@@ -119,7 +170,6 @@ describe('recent entries', () => {
         id='all'
         data={[]}
         pageNumber={0}
-        pageSize={10}
         titleName='Recent blog posts'
       />
     )
@@ -141,7 +191,6 @@ describe('recent entries', () => {
         id='all'
         data={[]}
         pageNumber={0}
-        pageSize={10}
         titleName='Recent blog posts'
       />
     )
@@ -163,7 +212,6 @@ describe('recent entries', () => {
         id='all'
         data={[]}
         pageNumber={0}
-        pageSize={10}
         titleName='Recent blog posts'
       />
     )
@@ -184,7 +232,6 @@ describe('recent entries', () => {
         id='all'
         data={[]}
         pageNumber={0}
-        pageSize={10}
         titleName='Recent blog posts'
       />
     )
@@ -200,7 +247,6 @@ describe('recent entries', () => {
         id='all'
         data={data}
         pageNumber={0}
-        pageSize={10}
         titleName='Recent blog posts'
       />
     )
@@ -224,7 +270,6 @@ describe('recent entries', () => {
         id='all'
         data={[...firstHalf, ...secondHalf]}
         pageNumber={0}
-        pageSize={10}
         titleName='Recent blog posts'
       />
     )
