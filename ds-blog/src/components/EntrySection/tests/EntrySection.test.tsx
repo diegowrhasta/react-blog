@@ -177,4 +177,19 @@ describe('recent entries', () => {
     expect(recentContainer).toBeInTheDocument()
     expect(recentList).toHaveClass('entry-container recent-desktop-container')
   })
+
+  test('passing invalid amount of entries should not render items', () => {
+    render(
+      <EntrySection
+        id='all'
+        data={[]}
+        pageNumber={0}
+        pageSize={10}
+        titleName='Recent blog posts'
+      />
+    )
+
+    const entries = screen.queryAllByRole('article')
+    expect(entries).toHaveLength(0)
+  })
 })

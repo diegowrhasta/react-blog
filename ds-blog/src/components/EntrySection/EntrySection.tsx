@@ -47,12 +47,37 @@ function EntrySection ({
     const phoneWindow = window.matchMedia('(max-width: 390px)')
     const ipadWindow = window.matchMedia('(max-width: 834px)')
 
-    let layoutElements: JSX.Element
-    let containerClass = ''
+    const layoutElements = getLayoutContents(phoneWindow, ipadWindow, entries)
 
+    let containerClass = ''
     if (phoneWindow.matches) {
       containerClass = 'recent-mobile-container'
-      layoutElements = (
+    } else if (ipadWindow.matches) {
+      containerClass = 'recent-ipad-container'
+    } else {
+      containerClass = 'recent-desktop-container'
+    }
+
+    return (
+      <div
+        role='list'
+        aria-label='Recent Entries List'
+        className={`entry-container ${containerClass}`}
+      >
+        {layoutElements}
+      </div>
+    )
+  }
+
+  function getLayoutContents (
+    phoneWindow: MediaQueryList,
+    ipadWindow: MediaQueryList,
+    entries: EntryInterface[]
+  ) {
+    if (entries.length < 4) {
+      return <></>
+    } else if (phoneWindow.matches) {
+      return (
         <>
           <Entry type={getRecentEntryType(0)} {...entries[0]} />
           <Entry type={getRecentEntryType(1)} {...entries[1]} />
@@ -61,8 +86,7 @@ function EntrySection ({
         </>
       )
     } else if (ipadWindow.matches) {
-      containerClass = 'recent-ipad-container'
-      layoutElements = (
+      return (
         <>
           <div className='first-row'>
             <Entry type={getRecentEntryType(0)} {...entries[0]} />
@@ -77,8 +101,7 @@ function EntrySection ({
         </>
       )
     } else {
-      containerClass = 'recent-desktop-container'
-      layoutElements = (
+      return (
         <>
           <div className='first-row'>
             <Entry type={getRecentEntryType(0)} {...entries[0]} />
@@ -93,16 +116,6 @@ function EntrySection ({
         </>
       )
     }
-
-    return (
-      <div
-        role='list'
-        aria-label='Recent Entries List'
-        className={`entry-container ${containerClass}`}
-      >
-        {layoutElements}
-      </div>
-    )
   }
 
   function getRecentEntryType (itemIndex: number) {
