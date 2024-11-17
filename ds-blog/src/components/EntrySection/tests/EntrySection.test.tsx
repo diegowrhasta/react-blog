@@ -109,6 +109,9 @@ describe('all entries', () => {
   })
 
   test('paginator is present, with correct accesibility and navigability', async () => {
+    const previousFocusElementNumber = 6 // Navigate all the top navbar elements.
+    const elementNumberFromNextToPrevious = 3
+    const user = userEvent.setup()
     const expectedPageNumber = 2
     const data = Array(4)
       .fill(null)
@@ -135,6 +138,7 @@ describe('all entries', () => {
     const nextButton = screen.getByRole('button', { name: /Go to next page/i })
     expect(previousButton).toBeInTheDocument()
     expect(nextButton).toBeInTheDocument()
+
     const previousButtonSvg = previousButton.querySelector('svg')
     const nextButtonSvg = nextButton.querySelector('svg')
     expect(previousButtonSvg).toBeInTheDocument()
@@ -142,8 +146,10 @@ describe('all entries', () => {
     expect(nextButtonSvg).toBeInTheDocument()
     expect(nextButtonSvg).toHaveAttribute('aria-hidden', 'true')
 
-    const defaultCurrentPage = screen.getByRole('button', { name: /1/i })
-    const nonCurrentPage = screen.getByRole('button', { name: /2/i })
+    const defaultCurrentPage = screen.getByRole('button', {
+      name: /Go to page 1/i
+    })
+    const nonCurrentPage = screen.getByRole('button', { name: /Go to page 2/i })
     const allPageButtons = screen
       .getAllByRole('button')
       .filter(element => element.className.includes('page-button'))
@@ -151,6 +157,48 @@ describe('all entries', () => {
     expect(defaultCurrentPage).toHaveAttribute('aria-current')
     expect(nonCurrentPage).not.toHaveAttribute('aria-current')
     expect(allPageButtons).toHaveLength(expectedPageNumber)
+
+    for (let i = 0; i < previousFocusElementNumber; i++) {
+      await user.tab()
+    }
+    expect(previousButton).toHaveFocus()
+
+    await user.tab()
+    expect(defaultCurrentPage).toHaveFocus()
+
+    await user.tab()
+    expect(nonCurrentPage).toHaveFocus()
+
+    await user.tab()
+    expect(nextButton).toHaveFocus()
+
+    for (let i = 0; i < elementNumberFromNextToPrevious; i++) {
+      await user.tab({ shift: true })
+    }
+    expect(previousButton).toHaveFocus()
+
+    await user.keyboard('{enter}')
+    expect(previousButton).toHaveFocus()
+
+    await user.tab()
+    await user.tab()
+    expect(nonCurrentPage).toHaveFocus()
+
+    await user.keyboard(' ')
+    expect(nonCurrentPage).toHaveFocus()
+    expect(defaultCurrentPage).not.toHaveAttribute('aria-current')
+    expect(nonCurrentPage).toHaveAttribute('aria-current')
+
+    await user.tab({ shift: true })
+    await user.keyboard('{enter}')
+    expect(defaultCurrentPage).toHaveFocus()
+    expect(defaultCurrentPage).toHaveAttribute('aria-current')
+    expect(nonCurrentPage).not.toHaveAttribute('aria-current')
+
+    await user.click(nonCurrentPage)
+    expect(defaultCurrentPage).not.toHaveFocus()
+    expect(defaultCurrentPage).not.toHaveAttribute('aria-current')
+    expect(nonCurrentPage).toHaveAttribute('aria-current')
   })
 })
 

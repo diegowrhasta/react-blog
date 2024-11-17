@@ -19,6 +19,8 @@
   --mode-btn-bg: #090d1f;
   --light-text: #667085;
   --paginator-text: #7f56d9;
+  --paginator-focus: #7f56d9;
+  --paginator-button-glow: rgba(127, 86, 217, 0.3);
   --paginator-button-hover: rgba(200, 200, 200, 0.5);
 
   .dark-theme {
@@ -30,6 +32,8 @@
     --mode-btn-bg: #ffffff;
     --light-text: #efefef;
     --paginator-text: #112211;
+    --paginator-focus: #efefef;
+    --paginator-button-glow: rgba(127, 86, 217, 0.3);
     --paginator-button-hover: rgba(255, 255, 255, 0.1);
   }
 }

@@ -131,19 +131,20 @@ function getButtonDistribution (
     const isCurrentPage = calculateIsSelectedPage(selectedPage, entry)
     const selectedStyle = isCurrentPage ? 'selected' : ''
     const ariaCurrent = isCurrentPage ? 'page' : undefined
+    const buttonText = coalesceButtonText(entry)
 
     return (
-      <div
-        role='button'
+      <button
         key={`${index}-page`}
         className={`page-button ${selectedStyle} ${calculateNavigableButton(
           entry
         )}`}
         onClick={() => onPageJump(entry, updatePageFn, setScrollToBottom)}
         aria-current={ariaCurrent}
+        aria-label={`Go to page ${buttonText}`}
       >
-        {coalesceButtonText(entry)}
-      </div>
+        {buttonText}
+      </button>
     )
   })
 }
