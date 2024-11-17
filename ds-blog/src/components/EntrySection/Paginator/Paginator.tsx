@@ -43,6 +43,7 @@ function Paginator ({ pageNumber }: PaginatorProps) {
           }
         >
           <svg
+            aria-hidden='true'
             width='20'
             height='21'
             viewBox='0 0 20 21'
@@ -82,6 +83,7 @@ function Paginator ({ pageNumber }: PaginatorProps) {
         >
           <span>Next</span>
           <svg
+            aria-hidden='true'
             width='20'
             height='21'
             viewBox='0 0 20 21'

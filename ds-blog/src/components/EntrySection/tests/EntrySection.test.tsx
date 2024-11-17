@@ -135,6 +135,12 @@ describe('all entries', () => {
     const nextButton = screen.getByRole('button', { name: /Go to next page/i })
     expect(previousButton).toBeInTheDocument()
     expect(nextButton).toBeInTheDocument()
+    const previousButtonSvg = previousButton.querySelector('svg')
+    const nextButtonSvg = nextButton.querySelector('svg')
+    expect(previousButtonSvg).toBeInTheDocument()
+    expect(previousButtonSvg).toHaveAttribute('aria-hidden', 'true')
+    expect(nextButtonSvg).toBeInTheDocument()
+    expect(nextButtonSvg).toHaveAttribute('aria-hidden', 'true')
 
     const defaultCurrentPage = screen.getByRole('button', { name: /1/i })
     const nonCurrentPage = screen.getByRole('button', { name: /2/i })
