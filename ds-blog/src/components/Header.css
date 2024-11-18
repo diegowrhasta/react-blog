@@ -34,7 +34,8 @@ header {
           text-decoration: none;
         }
 
-        &:hover {
+        &:hover,
+        &:focus {
           border-bottom: var(--border-color);
         }
       }
