@@ -109,7 +109,6 @@ describe('all entries', () => {
   })
 
   test('paginator is present, with correct accesibility and navigability', async () => {
-    const previousFocusElementNumber = 6 // Navigate all the top navbar elements.
     const elementNumberFromNextToPrevious = 3
     const user = userEvent.setup()
     const expectedPageNumber = 2
@@ -158,9 +157,7 @@ describe('all entries', () => {
     expect(nonCurrentPage).not.toHaveAttribute('aria-current')
     expect(allPageButtons).toHaveLength(expectedPageNumber)
 
-    for (let i = 0; i < previousFocusElementNumber; i++) {
-      await user.tab()
-    }
+    await user.tab()
     expect(previousButton).toHaveFocus()
 
     await user.tab()
