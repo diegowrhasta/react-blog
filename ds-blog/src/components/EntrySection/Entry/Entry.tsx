@@ -18,6 +18,7 @@ const DUMMY_ID = 'DUMMY-1'
 function Entry (props: EntryProps) {
   const navigate = useNavigate()
   const triggerRouting = useBlogDetailStore(state => state.triggerRouting)
+  const isSkeletonEntry = props.id === DUMMY_ID
 
   const tags = (props.labels ?? []).map((entry, index) => {
     return <Tag key={`${index}-tag`} label={entry} />
@@ -29,12 +30,12 @@ function Entry (props: EntryProps) {
   function onEntryClick (event: React.MouseEvent<HTMLDivElement>) {
     event.stopPropagation()
 
+    if (isSkeletonEntry) {
+      return
+    }
+
     triggerRouting(props.id)
     navigate(`/entry/${props.id}`)
-  }
-
-  function isSkeletonEntry (id: string) {
-    return id === DUMMY_ID ? 'skeleton' : ''
   }
 
   return (
@@ -42,7 +43,7 @@ function Entry (props: EntryProps) {
       aria-labelledby={`title-${props.id}`}
       onClick={onEntryClick}
       key={props.id}
-      className={`entry ${coalescedType} ${isSkeletonEntry(props.id)}`}
+      className={`entry ${coalescedType} ${isSkeletonEntry ? 'skeleton' : ''}`}
     >
       {entry}
     </article>
