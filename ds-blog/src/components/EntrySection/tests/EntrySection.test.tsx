@@ -157,7 +157,10 @@ describe('all entries', () => {
     expect(nonCurrentPage).not.toHaveAttribute('aria-current')
     expect(allPageButtons).toHaveLength(expectedPageNumber)
 
-    await user.tab()
+    // Tab all entries first
+    for (let i = 0; i < data.length + 1; i++) {
+      await user.tab()
+    }
     expect(previousButton).toHaveFocus()
 
     await user.tab()

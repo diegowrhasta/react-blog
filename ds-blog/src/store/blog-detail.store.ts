@@ -1,11 +1,20 @@
 import { create } from 'zustand'
-import { type BlogDetailInterface } from './types'
+import {
+  type BlogDetailActionsInterface,
+  type BlogDetailStateInterface
+} from './types'
 
-const useBlogDetailStore = create<BlogDetailInterface>(set => {
+const initialState: BlogDetailStateInterface = {
+  blogId: undefined,
+  routing: false,
+  detailLoading: false
+} as const
+
+const useBlogDetailStore = create<
+  BlogDetailActionsInterface & BlogDetailStateInterface
+>(set => {
   return {
-    blogId: undefined,
-    routing: false,
-    detailLoading: false,
+    ...initialState,
     setEntryAsLoaded: () => {
       set({ routing: false })
     },
@@ -14,6 +23,9 @@ const useBlogDetailStore = create<BlogDetailInterface>(set => {
     },
     setDetailLoading: (isLoading: boolean) => {
       set({ detailLoading: isLoading })
+    },
+    reset: () => {
+      set(initialState)
     }
   }
 })

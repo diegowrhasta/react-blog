@@ -26,15 +26,25 @@ interface AllEntriesInterface {
   ) => void
 }
 
-interface BlogDetailInterface {
+interface BlogDetailStateInterface {
   blogId: string | undefined
   routing: boolean
   detailLoading: boolean
+}
+
+interface BlogDetailActionsInterface {
   triggerRouting: (blogId: string) => void
   setEntryAsLoaded: () => void
   setDetailLoading: (isLoading: boolean) => void
+  reset: () => void
 }
 
 type modeType = 'dark' | 'light'
 
-export { GlobalInterface, AllEntriesInterface, BlogDetailInterface, modeType }
+export {
+  GlobalInterface,
+  AllEntriesInterface,
+  BlogDetailStateInterface,
+  BlogDetailActionsInterface,
+  modeType
+}

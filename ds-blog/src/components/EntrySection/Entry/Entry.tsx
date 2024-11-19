@@ -1,11 +1,12 @@
 import { Tag } from './Tag/Tag'
 
-import { type EntryInterface } from '../../../data'
+import { DUMMY_ENTRY, type EntryInterface } from '../../../data'
 import * as dateUtils from '../../../utils/date'
 import './Entry.css'
 import { type ENTRY_TYPES } from '../../../constants'
 import { useBlogDetailStore } from '../../../store'
 import { useNavigate } from 'react-router-dom'
+import { onInteractiveKeyDown } from 'src/utils/input-events'
 
 interface EntryProps extends EntryInterface {
   type?: EntryTypes | undefined
@@ -13,12 +14,15 @@ interface EntryProps extends EntryInterface {
 
 type EntryTypes = typeof ENTRY_TYPES[keyof typeof ENTRY_TYPES]
 
-const DUMMY_ID = 'DUMMY-1'
+const DUMMY_ID = DUMMY_ENTRY.id
 
 function Entry (props: EntryProps) {
   const navigate = useNavigate()
   const triggerRouting = useBlogDetailStore(state => state.triggerRouting)
   const isSkeletonEntry = props.id === DUMMY_ID
+  const coalescedId = isSkeletonEntry
+    ? `${props.id}${(Math.random() * 16) | 0}`
+    : props.id
 
   const tags = (props.labels ?? []).map((entry, index) => {
     return <Tag key={`${index}-tag`} label={entry} />
@@ -30,6 +34,16 @@ function Entry (props: EntryProps) {
   function onEntryClick (event: React.MouseEvent<HTMLDivElement>) {
     event.stopPropagation()
 
+    callToAction()
+  }
+
+  function onKeyDown (event: React.KeyboardEvent<HTMLDivElement>) {
+    event.stopPropagation()
+
+    onInteractiveKeyDown(event.key, callToAction)
+  }
+
+  function callToAction () {
     if (isSkeletonEntry) {
       return
     }
@@ -40,9 +54,11 @@ function Entry (props: EntryProps) {
 
   return (
     <article
+      tabIndex={!isSkeletonEntry ? 0 : undefined}
       aria-labelledby={`title-${props.id}`}
       onClick={onEntryClick}
-      key={props.id}
+      onKeyDown={onKeyDown}
+      key={coalescedId}
       className={`entry ${coalescedType} ${isSkeletonEntry ? 'skeleton' : ''}`}
     >
       {entry}
