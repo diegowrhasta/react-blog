@@ -15,9 +15,9 @@ export function About () {
 
   return (
     <div className='about-container'>
-      <img src={aboutPicture} alt='person-with-glasses' />
-      <section id='about-me'>
-        <label>About Me</label>
+      <img src={aboutPicture} alt='Person with glasses banner' />
+      <section aria-labelledby='about-me-title' id='about-me'>
+        <h2 id='about-me-title'>About Me</h2>
         <p>
           As a passionate and experienced Full Stack Developer, I am dedicated
           to creating engaging, practical, maintainable, and robust information
@@ -34,8 +34,8 @@ export function About () {
           team when necessary, and always remaining hungry for knowledge.
         </p>
       </section>
-      <section id='skills'>
-        <label>Skills:</label>
+      <section aria-labelledby='skills-title' id='skills'>
+        <h2 id='skills-title'>Skills:</h2>
         <ul>
           <li>
             Extensive experience in UI porting from design tools such as Figma
@@ -70,8 +70,8 @@ export function About () {
           </li>
         </ul>
       </section>
-      <section id='experience'>
-        <label>Experience:</label>
+      <section aria-labelledby='experience-title' id='experience'>
+        <h2 id='experience-title'>Experience:</h2>
         <ul>
           <li>
             5 years of experience as a Full Stack Developer, working on a
@@ -98,8 +98,8 @@ export function About () {
           </li>
         </ul>
       </section>
-      <section id='education'>
-        <label>Education:</label>
+      <section aria-labelledby='education-title' id='education'>
+        <h2 id='education-title'>Education:</h2>
         <ul>
           <li>Bachelor's Degree in System Engineering</li>
           <li>GitHub Foundations Certified</li>

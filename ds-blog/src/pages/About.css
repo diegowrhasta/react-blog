@@ -7,8 +7,9 @@ div.about-container {
     width: 100%;
     max-width: 100%;
     height: auto;
+    max-height: 420px;
+    object-position: 50% 10%;
     object-fit: cover;
-    justify-self: center;
     align-self: center;
   }
 
@@ -17,7 +18,7 @@ div.about-container {
     flex-direction: column;
     gap: 15px;
 
-    label {
+    h2 {
       font-weight: 600;
       font-size: 24px;
     }
