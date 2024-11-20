@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
 import { Footer } from '../Footer'
 
@@ -48,4 +49,24 @@ test('footer on small screens has items in correct order', () => {
   expect(linkOptions).toHaveLength(2)
   expect(optionLabels).toEqual(['LinkedIn', 'Email', '© 2024'])
   expect(linkLabels).toEqual(['LinkedIn', 'Email'])
+})
+
+test('list items are navigable', async () => {
+  const user = userEvent.setup()
+  render(<Footer />)
+
+  const linkedInLink = screen.getByRole('link', { name: /LinkedIn/i })
+  await user.tab()
+  expect(linkedInLink).toHaveFocus()
+
+  const emailLink = screen.getByRole('link', { name: /Email/i })
+  await user.tab()
+  expect(emailLink).toHaveFocus()
+
+  await user.tab()
+  await user.tab({ shift: true })
+  expect(emailLink).toHaveFocus()
+
+  await user.tab({ shift: true })
+  expect(linkedInLink).toHaveFocus()
 })
