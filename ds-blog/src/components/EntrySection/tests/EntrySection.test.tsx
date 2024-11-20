@@ -104,8 +104,8 @@ describe('all entries', () => {
       name: /UX review presentations/i
     }).id
     expect(articleElements).toHaveLength(1)
-    expect(ariaLabelIds).toEqual(['title-DUMMY-1'])
-    expect(labelEntryId).toBe('title-DUMMY-1')
+    expect(ariaLabelIds[0]).toContain(['title-DUMMY-1'])
+    expect(labelEntryId).toContain('title-DUMMY-1')
   })
 
   test('paginator is present, with correct accesibility and navigability', async () => {

@@ -28,7 +28,7 @@ function Entry (props: EntryProps) {
     return <Tag key={`${index}-tag`} label={entry} />
   })
 
-  const entry = getEntryType(props, tags)
+  const entry = getEntryType({ ...props, id: coalescedId }, tags)
   const coalescedType = props.type || 'small-picture-top'
 
   function onEntryClick (event: React.MouseEvent<HTMLDivElement>) {
@@ -55,7 +55,7 @@ function Entry (props: EntryProps) {
   return (
     <article
       tabIndex={!isSkeletonEntry ? 0 : undefined}
-      aria-labelledby={`title-${props.id}`}
+      aria-labelledby={`title-${coalescedId}`}
       onClick={onEntryClick}
       onKeyDown={onKeyDown}
       key={coalescedId}
