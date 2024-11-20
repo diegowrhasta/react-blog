@@ -217,6 +217,7 @@ describe('recent entries', () => {
     })
     expect(paginator).not.toBeInTheDocument()
   })
+
   test('mobile screen size has specific layout', () => {
     setMatcher({ queryToMatch: '(max-width: 390px)' })
     render(
