@@ -23,6 +23,102 @@ function Paginator ({ pageNumber }: PaginatorProps) {
     updateNewPageCalculation(selectedPage)
   }, [selectedPage, updateNewPageCalculation])
 
+  function getButtonDistribution (
+    pageNumber: number,
+    selectedPage: number,
+    updatePageFn: Dispatch<SetStateAction<number>>,
+    setScrollToBottom: (scrollToBottom: boolean) => void
+  ) {
+    const maxFullSize = 6
+    const pageEntry: number[] = []
+    if (pageNumber > maxFullSize) {
+      for (let i = 1; i <= 3; i++) {
+        pageEntry.push(i)
+      }
+
+      pageEntry.push(-1)
+
+      for (let i = 1; i <= 3; i++) {
+        pageEntry.push(pageNumber - i)
+      }
+    }
+
+    for (let i = 1; i <= pageNumber; i++) {
+      pageEntry.push(i)
+    }
+
+    return pageEntry.map((entry, index) => {
+      const isCurrentPage = calculateIsSelectedPage(selectedPage, entry)
+      const selectedStyle = isCurrentPage ? 'selected' : ''
+      const ariaCurrent = isCurrentPage ? 'page' : undefined
+      const buttonText = coalesceButtonText(entry)
+
+      return (
+        <button
+          key={`${index}-page`}
+          className={`page-button ${selectedStyle} ${calculateNavigableButton(
+            entry
+          )}`}
+          onClick={() => onPageJump(entry, updatePageFn, setScrollToBottom)}
+          aria-current={ariaCurrent}
+          aria-label={`Go to page ${buttonText}`}
+        >
+          {buttonText}
+        </button>
+      )
+    })
+  }
+
+  function coalesceButtonText (number: number) {
+    if (number === -1) {
+      return '...'
+    }
+
+    return number
+  }
+
+  function onPageChange (
+    direction: number,
+    currentPage: number,
+    pageNumber: number,
+    updatePageFn: Dispatch<SetStateAction<number>>,
+    setScrollToBottom: (scrollToBottom: boolean) => void
+  ) {
+    let newPage = currentPage + direction
+
+    if (newPage < 1) {
+      newPage = 1
+    }
+
+    if (newPage > pageNumber) {
+      newPage = pageNumber
+    }
+
+    updatePageFn(newPage)
+    setScrollToBottom(true)
+  }
+
+  function onPageJump (
+    pageToJump: number,
+    updatePageFn: Dispatch<SetStateAction<number>>,
+    setScrollToBottom: (scrollToBottom: boolean) => void
+  ) {
+    if (pageToJump === -1) {
+      return
+    }
+
+    updatePageFn(pageToJump)
+    setScrollToBottom(true)
+  }
+
+  function calculateIsSelectedPage (selectedPage: number, entry: number) {
+    return selectedPage === entry
+  }
+
+  function calculateNavigableButton (entry: number) {
+    return entry === -1 ? 'no-click' : ''
+  }
+
   return (
     <div
       role='navigation'
@@ -101,102 +197,6 @@ function Paginator ({ pageNumber }: PaginatorProps) {
       </span>
     </div>
   )
-}
-
-function getButtonDistribution (
-  pageNumber: number,
-  selectedPage: number,
-  updatePageFn: Dispatch<SetStateAction<number>>,
-  setScrollToBottom: (scrollToBottom: boolean) => void
-) {
-  const maxFullSize = 6
-  const pageEntry: number[] = []
-  if (pageNumber > maxFullSize) {
-    for (let i = 1; i <= 3; i++) {
-      pageEntry.push(i)
-    }
-
-    pageEntry.push(-1)
-
-    for (let i = 1; i <= 3; i++) {
-      pageEntry.push(pageNumber - i)
-    }
-  }
-
-  for (let i = 1; i <= pageNumber; i++) {
-    pageEntry.push(i)
-  }
-
-  return pageEntry.map((entry, index) => {
-    const isCurrentPage = calculateIsSelectedPage(selectedPage, entry)
-    const selectedStyle = isCurrentPage ? 'selected' : ''
-    const ariaCurrent = isCurrentPage ? 'page' : undefined
-    const buttonText = coalesceButtonText(entry)
-
-    return (
-      <button
-        key={`${index}-page`}
-        className={`page-button ${selectedStyle} ${calculateNavigableButton(
-          entry
-        )}`}
-        onClick={() => onPageJump(entry, updatePageFn, setScrollToBottom)}
-        aria-current={ariaCurrent}
-        aria-label={`Go to page ${buttonText}`}
-      >
-        {buttonText}
-      </button>
-    )
-  })
-}
-
-function coalesceButtonText (number: number) {
-  if (number === -1) {
-    return '...'
-  }
-
-  return number
-}
-
-function onPageChange (
-  direction: number,
-  currentPage: number,
-  pageNumber: number,
-  updatePageFn: Dispatch<SetStateAction<number>>,
-  setScrollToBottom: (scrollToBottom: boolean) => void
-) {
-  let newPage = currentPage + direction
-
-  if (newPage < 1) {
-    newPage = 1
-  }
-
-  if (newPage > pageNumber) {
-    newPage = pageNumber
-  }
-
-  updatePageFn(newPage)
-  setScrollToBottom(true)
-}
-
-function onPageJump (
-  pageToJump: number,
-  updatePageFn: Dispatch<SetStateAction<number>>,
-  setScrollToBottom: (scrollToBottom: boolean) => void
-) {
-  if (pageToJump === -1) {
-    return
-  }
-
-  updatePageFn(pageToJump)
-  setScrollToBottom(true)
-}
-
-function calculateIsSelectedPage (selectedPage: number, entry: number) {
-  return selectedPage === entry
-}
-
-function calculateNavigableButton (entry: number) {
-  return entry === -1 ? 'no-click' : ''
 }
 
 export { Paginator }
