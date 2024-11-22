@@ -5,6 +5,12 @@ div {
     gap: 8px;
   }
 
+  h2.title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+  }
+
   span {
     &.no-entries {
       font-style: italic;

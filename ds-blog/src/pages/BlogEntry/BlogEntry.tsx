@@ -30,10 +30,10 @@ function BlogEntry () {
 
   return (
     <div className='entry-container'>
-      <section className='sidebar'>
+      <section aria-label='Recent entries sidebar' className='sidebar'>
         <BlogEntrySidebar entryId={validatedEntryId!} />
       </section>
-      <section className='detail'>
+      <section aria-label='Post Content' className='detail'>
         <BlogEntryDetail entryId={validatedEntryId!} />
       </section>
     </div>

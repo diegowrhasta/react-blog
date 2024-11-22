@@ -114,6 +114,7 @@ function BlogEntryDetail ({ entryId }: BlogEntryDetailProps) {
       {!detailLoading && (
         <div className='detail-container'>
           <article
+            aria-labelledby='post-title'
             ref={articleRef}
             dangerouslySetInnerHTML={{ __html: entryContent }}
           ></article>

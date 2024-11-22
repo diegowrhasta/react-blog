@@ -19,7 +19,7 @@ function BlogEntrySidebar ({ entryId }: BlogEntrySidebarProps) {
 
   return (
     <div className='recent-blog-entries'>
-      <span className='title'>Recent blog posts</span>
+      <h2 className='title'>Recent blog posts</h2>
       {entriesElements.length === 0 && (
         <span className='no-entries'>No more entries available...</span>
       )}
