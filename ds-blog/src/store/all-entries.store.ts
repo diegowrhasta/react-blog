@@ -1,8 +1,20 @@
 import { create } from 'zustand'
-import { type AllEntriesInterface } from './types'
+import {
+  type AllEntriesStateInterface,
+  type AllEntriesActionsInterface
+} from './types'
 import { type EntryInterface } from '../data/entry.interface'
 
-const useAllEntriesStore = create<AllEntriesInterface>(set => {
+const initialState: AllEntriesStateInterface = {
+  allEntries: [],
+  currentPageEntries: [],
+  currentPage: 1,
+  calculatingNewPage: false
+} as const
+
+const useAllEntriesStore = create<
+  AllEntriesStateInterface & AllEntriesActionsInterface
+>(set => {
   return {
     allEntries: [],
     currentPageEntries: [],
@@ -23,6 +35,9 @@ const useAllEntriesStore = create<AllEntriesInterface>(set => {
       currentPage: number
     ) => {
       set({ currentPageEntries, currentPage, calculatingNewPage: false })
+    },
+    reset: () => {
+      set(initialState)
     }
   }
 })

@@ -18,13 +18,17 @@ function BlogEntrySidebar ({ entryId }: BlogEntrySidebarProps) {
     .slice(0, 5)
 
   return (
-    <div className='recent-blog-entries'>
-      <h2 className='title'>Recent blog posts</h2>
+    <section aria-labelledby='sidebar-title' className='recent-blog-entries'>
+      <h2 id='sidebar-title' className='title'>
+        Recent blog posts
+      </h2>
       {entriesElements.length === 0 && (
-        <span className='no-entries'>No more entries available...</span>
+        <p role='status' aria-live='polite' className='no-entries'>
+          No more entries available...
+        </p>
       )}
       {entriesElements}
-    </div>
+    </section>
   )
 }
 

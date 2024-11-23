@@ -1,4 +1,4 @@
-div {
+section {
   &.recent-blog-entries {
     display: flex;
     flex-direction: column;
@@ -11,7 +11,7 @@ div {
     font-size: 24px;
   }
 
-  span {
+  p {
     &.no-entries {
       font-style: italic;
       font-weight: 500;

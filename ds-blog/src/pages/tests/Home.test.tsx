@@ -2,24 +2,10 @@ import { screen, render } from 'testing-library-utils'
 import userEvent from '@testing-library/user-event'
 
 import { Home } from '../Home'
-import { DUMMY_ENTRY } from 'src/data'
-import { generateUUID } from 'src/utils'
-import * as entriesUtils from 'src/utils/entries'
-import { useAllEntriesStore } from 'src/store'
+import { seedStoreWithDummies } from 'src/test-utils'
 
 beforeAll(() => {
-  const data = Array(10)
-    .fill(null)
-    .map(() => ({ ...DUMMY_ENTRY, id: generateUUID() }))
-  const entryData = data.sortEntriesDesc()
-  const INITIAL_PAGE = 1
-  const currentPageEntries = entriesUtils.getPageEntries(
-    entryData,
-    INITIAL_PAGE
-  )
-  const updateAllEntries = useAllEntriesStore.getState().updateAllEntries
-
-  updateAllEntries(entryData, currentPageEntries, INITIAL_PAGE)
+  seedStoreWithDummies(10)
 })
 
 test('home page is accesible and navigable', async () => {
