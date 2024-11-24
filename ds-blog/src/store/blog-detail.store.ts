@@ -6,8 +6,7 @@ import {
 
 const initialState: BlogDetailStateInterface = {
   blogId: undefined,
-  routing: false,
-  detailLoading: false
+  routing: false
 } as const
 
 const useBlogDetailStore = create<
@@ -20,9 +19,6 @@ const useBlogDetailStore = create<
     },
     triggerRouting: (blogId: string) => {
       set({ blogId: blogId, routing: true })
-    },
-    setDetailLoading: (isLoading: boolean) => {
-      set({ detailLoading: isLoading })
     },
     reset: () => {
       set(initialState)

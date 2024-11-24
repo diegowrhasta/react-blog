@@ -19,7 +19,7 @@ test('full navigation to specific entry works and has accesibility', async () =>
   const [recentBlogsElement] = firstEntryElements
 
   await user.click(recentBlogsElement)
-  let loading = screen.getByRole('heading', { name: /Loading.../i })
+  let loading = screen.getByRole('status', { name: /Post loading/i })
   expect(loading).toBeInTheDocument()
 
   let loadedEntry = await screen.findByRole('article', {
@@ -40,7 +40,7 @@ test('full navigation to specific entry works and has accesibility', async () =>
 
   const [, allBlogsElement] = firstEntryElements
   await user.click(allBlogsElement)
-  loading = screen.getByRole('heading', { name: /Loading.../i })
+  loading = screen.getByRole('status', { name: /Post Loading/i })
   expect(loading).toBeInTheDocument()
 
   loadedEntry = await screen.findByRole('article', {

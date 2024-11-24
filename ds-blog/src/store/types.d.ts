@@ -33,13 +33,11 @@ interface AllEntriesActionsInterface {
 interface BlogDetailStateInterface {
   blogId: string | undefined
   routing: boolean
-  detailLoading: boolean
 }
 
 interface BlogDetailActionsInterface {
   triggerRouting: (blogId: string) => void
   setEntryAsLoaded: () => void
-  setDetailLoading: (isLoading: boolean) => void
   reset: () => void
 }
 

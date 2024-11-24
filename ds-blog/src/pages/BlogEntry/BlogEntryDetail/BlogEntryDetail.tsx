@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './BlogEntryDetail.css'
 import { getBlogEntry, type LabelInterface } from '../../../data'
-import { useBlogDetailStore } from '../../../store'
 import { Tag } from '../../../components'
 
 interface BlogEntryDetailProps {
@@ -9,8 +8,7 @@ interface BlogEntryDetailProps {
 }
 
 function BlogEntryDetail ({ entryId }: BlogEntryDetailProps) {
-  const detailLoading = useBlogDetailStore(state => state.detailLoading)
-  const setIsLoading = useBlogDetailStore(state => state.setDetailLoading)
+  const [detailLoading, setIsLoading] = useState(true)
 
   const [entryContent, setEntryContent] = useState('')
   const [tags, setTags] = useState<LabelInterface[]>([])
@@ -35,15 +33,15 @@ function BlogEntryDetail ({ entryId }: BlogEntryDetailProps) {
     setTags(labels)
 
     fetch(`/blogs/${date.getFullYear()}/${date.getMonth() + 1}/${entryId}.html`)
-      .then(response => {
-        return response.text()
+      .then(async response => {
+        const text = await response.text()
+        setEntryContent(text)
+        triggerReadPosition()
       })
-      .then(setEntryContent)
-      .then(triggerReadPosition)
       .catch(console.log)
   }, [entryId, setIsLoading])
 
-  // Loading of all media check plus loading effect
+  // Loading of all media check plus setting loading to off
   useEffect(() => {
     const checkImagesLoaded = (
       ref: React.MutableRefObject<HTMLDivElement | null>
@@ -51,8 +49,6 @@ function BlogEntryDetail ({ entryId }: BlogEntryDetailProps) {
       if (ref.current == null) {
         return
       }
-
-      setIsLoading(true)
 
       const images = ref.current.querySelectorAll('img')
       let loadedCount = 0
@@ -110,7 +106,16 @@ function BlogEntryDetail ({ entryId }: BlogEntryDetailProps) {
 
   return (
     <>
-      {detailLoading && <h2 style={{ textAlign: 'center' }}>Loading...</h2>}
+      {detailLoading && (
+        <h2
+          role='status'
+          aria-live='polite'
+          aria-label='Post Loading'
+          style={{ textAlign: 'center' }}
+        >
+          Loading...
+        </h2>
+      )}
       {!detailLoading && (
         <div className='detail-container'>
           <article

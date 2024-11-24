@@ -109,7 +109,7 @@ function generateMockData () {
 }
 
 function getBlogEntry (id: string) {
-  return _data?.find(x => x.id === id)
+  return getData()?.find(x => x.id === id)
 }
 
 export { getData, LABEL_ENTRIES, DUMMY_ENTRY, getBlogEntry, createRandomEntry }
