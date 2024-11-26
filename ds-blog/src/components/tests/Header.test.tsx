@@ -1,4 +1,4 @@
-import { render, screen } from 'testing-library-utils'
+import { render, screen, within } from 'testing-library-utils'
 import userEvent from '@testing-library/user-event'
 
 import { Header } from '../Header'
@@ -84,4 +84,68 @@ test('header is accesible and can be navigated', async () => {
 
   await userEvent.click(homeLink)
   expect(homeLink).toHaveFocus()
+})
+
+test('hamburger button shows overlay correctly', async () => {
+  const buttonClickMock = vi.fn()
+
+  render(<Header onModeButtonClick={buttonClickMock} />)
+
+  const hamburgerButton = screen.getByRole('button', {
+    name: /Hamburger Button/i
+  })
+  expect(hamburgerButton).toBeInTheDocument()
+  expect(hamburgerButton).toBeVisible()
+  expect(document.body.style.overflow).toBe('')
+  expect(document.documentElement.style.overflow).toBe('')
+
+  await userEvent.click(hamburgerButton)
+  const overlayMenu = screen.getByRole('menu', { name: /Menu overlay/i })
+  expect(overlayMenu).toBeInTheDocument()
+  expect(overlayMenu).toBeVisible()
+  expect(overlayMenu).toHaveAttribute('aria-modal', 'true')
+
+  const menuLinks = within(overlayMenu).getAllByRole('link')
+  const linkLabels = menuLinks.map(element => element.textContent)
+  const modeButton = within(overlayMenu).getByRole('button', {
+    name: /Mode button/i
+  })
+  const closeMenuButton = within(overlayMenu).getByRole('button', {
+    name: /Close menu/i
+  })
+  expect(menuLinks).toHaveLength(4)
+  expect(linkLabels).toEqual(['Home', 'Recent', 'All', 'About'])
+  expect(modeButton).toBeInTheDocument()
+  expect(closeMenuButton).toBeInTheDocument()
+
+  await userEvent.click(modeButton)
+  expect(buttonClickMock).toHaveBeenCalledTimes(1)
+  expect(overlayMenu).toBeVisible()
+
+  await userEvent.click(modeButton)
+  expect(buttonClickMock).toHaveBeenCalledTimes(2)
+  expect(overlayMenu).toBeVisible()
+
+  await userEvent.click(closeMenuButton)
+  expect(overlayMenu).not.toBeVisible()
+
+  await userEvent.click(hamburgerButton)
+  const homeLink = menuLinks[0]
+  await userEvent.click(homeLink)
+  expect(overlayMenu).not.toBeVisible()
+
+  await userEvent.click(hamburgerButton)
+  const recentLink = menuLinks[1]
+  await userEvent.click(recentLink)
+  expect(overlayMenu).not.toBeVisible()
+
+  await userEvent.click(hamburgerButton)
+  const allLink = menuLinks[2]
+  await userEvent.click(allLink)
+  expect(overlayMenu).not.toBeVisible()
+
+  await userEvent.click(hamburgerButton)
+  const aboutLink = screen.getByRole('link', { name: /About/i })
+  await userEvent.click(aboutLink)
+  expect(overlayMenu).not.toBeVisible()
 })

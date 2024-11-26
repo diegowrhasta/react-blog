@@ -63,14 +63,22 @@ function OverlayMenu ({
   }
 
   return (
-    <div onClick={onCloseOverlay} className='overlay-menu'>
+    <div
+      aria-label='Menu Overlay'
+      role='menu'
+      aria-modal={true}
+      onClick={onCloseOverlay}
+      className='overlay-menu'
+    >
       <h3>Diego Balderrama</h3>
       <Link to={'/'}>Home</Link>
       <a href='#recent'>Recent</a>
       <a href='#all'>All</a>
       <Link to={'about'}>About</Link>
       <ModeButton onClick={onModeButtonClick} />
-      <h2 className='close-overlay'>X</h2>
+      <h2 role='button' aria-label='Close menu' className='close-overlay'>
+        X
+      </h2>
     </div>
   )
 }

@@ -10,6 +10,10 @@ beforeEach(() => {
     .triggerRouting('70e2c51a-f70f-4df5-9cb8-bc4b88260888')
 })
 
+beforeEach(() => {
+  vi.stubGlobal('scrollTo', () => {}) // Raises warning since window.scrollTo is not available
+})
+
 test('page has accesible and navigable properties', () => {
   render(<BlogEntry />)
 
