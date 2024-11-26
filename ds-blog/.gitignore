@@ -28,3 +28,6 @@ dist-ssr
 
 # Deploy
 .firebase
+
+# Testing artifacts
+coverage/
