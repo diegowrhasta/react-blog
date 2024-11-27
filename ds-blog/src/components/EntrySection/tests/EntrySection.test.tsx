@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import { EntrySection } from '../EntrySection'
 import { DUMMY_ENTRY, type EntryInterface } from 'src/data'
 import { generateUUID } from 'src/utils'
+import { getMockedDummyArray } from 'src/test-utils'
 
 const setMatcher = ({
   queryToMatch,
@@ -219,11 +220,12 @@ describe('recent entries', () => {
   })
 
   test('mobile screen size has specific layout', () => {
+    const data = getMockedDummyArray(5)
     setMatcher({ queryToMatch: '(max-width: 390px)' })
     render(
       <EntrySection
         id='all'
-        data={[]}
+        data={data}
         pageNumber={0}
         titleName='Recent blog posts'
       />
@@ -240,11 +242,12 @@ describe('recent entries', () => {
   })
 
   test('ipad screen size has specific layout', () => {
+    const data = getMockedDummyArray(5)
     setMatcher({ queryToMatch: '(max-width: 834px)' })
     render(
       <EntrySection
         id='all'
-        data={[]}
+        data={data}
         pageNumber={0}
         titleName='Recent blog posts'
       />
@@ -261,11 +264,12 @@ describe('recent entries', () => {
   })
 
   test('desktop screen size has specific layout', () => {
+    const data = getMockedDummyArray(5)
     setMatcher({ queryToMatch: '(max-width: 1920px)' }) // Passing a whatever value
     render(
       <EntrySection
         id='all'
-        data={[]}
+        data={data}
         pageNumber={0}
         titleName='Recent blog posts'
       />

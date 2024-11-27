@@ -128,27 +128,25 @@ function EntrySection ({
     if (ipadWindow.matches) {
       switch (itemIndex) {
         case 0:
+        default:
           return ENTRY_TYPES.BIG_PICTURE_TOP
         case 1:
         case 2:
           return ENTRY_TYPES.SMALL_PICTURE_LEFT
         case 3:
           return ENTRY_TYPES.BIG_PICTURE_TOP
-        default:
-          return ENTRY_TYPES.BIG_PICTURE_TOP
       }
     }
 
     switch (itemIndex) {
       case 0:
+      default:
         return ENTRY_TYPES.MEDIUM_PICTURE_TOP
       case 1:
       case 2:
         return ENTRY_TYPES.SMALL_PICTURE_LEFT
       case 3:
         return ENTRY_TYPES.MEDIUM_PICTURE_LEFT
-      default:
-        return ENTRY_TYPES.BIG_PICTURE_TOP
     }
   }
 
