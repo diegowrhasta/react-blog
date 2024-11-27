@@ -12,5 +12,5 @@ export interface EntryInterface {
   text?: string
   previewImage?: string
   previewText: string
-  labels: Array<LabelInterface>
+  labels?: Array<LabelInterface>
 }

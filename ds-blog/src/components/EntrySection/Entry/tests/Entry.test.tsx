@@ -64,3 +64,21 @@ test('skeleton entry is not focusable nor actionable', async () => {
   await user.click(entry)
   expect(useBlogDetailStore.getState().routing).toBeFalsy()
 })
+
+test('skeleton entry is short circuited', async () => {
+  const user = userEvent.setup()
+  const entryProps: EntryInterface = {
+    ...createRandomEntry(),
+    id: DUMMY_ENTRY.id,
+    labels: undefined
+  }
+  render(<Entry {...entryProps} />)
+
+  const entry = screen.getByRole('article', {
+    name: new RegExp(entryProps.title, 'i')
+  })
+  expect(entry).toBeInTheDocument()
+
+  await user.click(entry)
+  expect(useBlogDetailStore.getState().routing).toBeFalsy()
+})
