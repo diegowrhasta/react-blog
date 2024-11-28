@@ -3,6 +3,8 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import './Paginator.css'
 import { useAllEntriesStore, useGlobalStore } from '../../../store'
 
+const MAX_PAGE_NUMBER = 6
+
 const PAGE_DIRECTIONS = {
   previousPage: -1,
   nextPage: 1
@@ -29,39 +31,36 @@ function Paginator ({ pageNumber }: PaginatorProps) {
     updatePageFn: Dispatch<SetStateAction<number>>,
     setScrollToBottom: (scrollToBottom: boolean) => void
   ) {
-    const maxFullSize = 6
     const pageEntry: number[] = []
-    if (pageNumber > maxFullSize) {
-      for (let i = 1; i <= 3; i++) {
+
+    if (pageNumber > MAX_PAGE_NUMBER) {
+      calculateEllipsisDistribution(pageEntry, selectedPage, pageNumber)
+    } else {
+      for (let i = 1; i <= pageNumber; i++) {
         pageEntry.push(i)
       }
-
-      pageEntry.push(-1)
-
-      for (let i = 1; i <= 3; i++) {
-        pageEntry.push(pageNumber - i)
-      }
-    }
-
-    for (let i = 1; i <= pageNumber; i++) {
-      pageEntry.push(i)
     }
 
     return pageEntry.map((entry, index) => {
+      const isEllipsis = entry === -1
       const isCurrentPage = calculateIsSelectedPage(selectedPage, entry)
       const selectedStyle = isCurrentPage ? 'selected' : ''
       const ariaCurrent = isCurrentPage ? 'page' : undefined
-      const buttonText = coalesceButtonText(entry)
+      const buttonText = coalesceButtonText(isEllipsis, entry)
+      const ariaLabel = isEllipsis
+        ? 'Skipped pages, not clickable'
+        : `Go to page ${buttonText}`
 
       return (
         <button
+          disabled={isEllipsis}
           key={`${index}-page`}
           className={`page-button ${selectedStyle} ${calculateNavigableButton(
             entry
           )}`}
           onClick={() => onPageJump(entry, updatePageFn, setScrollToBottom)}
           aria-current={ariaCurrent}
-          aria-label={`Go to page ${buttonText}`}
+          aria-label={ariaLabel}
         >
           {buttonText}
         </button>
@@ -69,12 +68,32 @@ function Paginator ({ pageNumber }: PaginatorProps) {
     })
   }
 
-  function coalesceButtonText (number: number) {
-    if (number === -1) {
-      return '...'
+  function calculateEllipsisDistribution (
+    pageEntry: number[],
+    selectedPage: number,
+    pageNumber: number
+  ) {
+    const initialRange = []
+
+    if (selectedPage > 3 && selectedPage < pageNumber - 2) {
+      initialRange.push(selectedPage - 2, selectedPage)
+    } else {
+      initialRange.push(1, 3)
     }
 
-    return number
+    for (let i = initialRange[0]; i <= initialRange[1]; i++) {
+      pageEntry.push(i)
+    }
+
+    pageEntry.push(-1)
+
+    for (let i = pageNumber - 2; i <= pageNumber; i++) {
+      pageEntry.push(i)
+    }
+  }
+
+  function coalesceButtonText (isEllipsis: boolean, text: number) {
+    return isEllipsis ? '...' : text
   }
 
   function onPageChange (
@@ -103,10 +122,6 @@ function Paginator ({ pageNumber }: PaginatorProps) {
     updatePageFn: Dispatch<SetStateAction<number>>,
     setScrollToBottom: (scrollToBottom: boolean) => void
   ) {
-    if (pageToJump === -1) {
-      return
-    }
-
     updatePageFn(pageToJump)
     setScrollToBottom(true)
   }
