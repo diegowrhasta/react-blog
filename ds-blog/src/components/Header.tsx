@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { ModeButton } from './ModeButton/ModeButton'
+import { ModeButton } from './ModeButton'
 
 import './Header.css'
 import { useGlobalStore } from '../store'
