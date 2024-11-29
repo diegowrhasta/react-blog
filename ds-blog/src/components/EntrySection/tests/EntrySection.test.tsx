@@ -25,6 +25,10 @@ const setMatcher = ({
   }))
 }
 
+afterEach(() => {
+  vi.restoreAllMocks()
+})
+
 describe('all entries', () => {
   test('all screen sizes behave the same', () => {
     setMatcher({ queryToMatch: '(max-width: 390px)' })
