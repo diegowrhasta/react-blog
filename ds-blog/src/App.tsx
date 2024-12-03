@@ -20,7 +20,6 @@ function App () {
 
   useEffect(() => {
     if (scrollToBottom) {
-      console.log('I AM INT')
       scrollUtils.onContentUpdate()
       setScrollToBottom(false)
     }
