@@ -16,4 +16,9 @@ test('mode button click changes style', async () => {
   expect(modeButton).toBeInTheDocument()
   expect(modeButton).toHaveClass('dark')
   expect(document.body).toHaveClass('dark-theme')
+
+  await user.click(modeButton)
+  expect(modeButton).toBeInTheDocument()
+  expect(modeButton).not.toHaveClass('dark')
+  expect(document.body).not.toHaveClass('dark-theme')
 })
