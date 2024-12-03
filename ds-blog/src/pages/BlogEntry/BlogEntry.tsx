@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { BlogEntrySidebar } from './BlogEntrySidebar'
-import { BlogEntryDetail } from './BlogEntryDetail'
+import { BlogEntrySidebar } from './'
+import { BlogEntryDetail } from './'
 
 import './BlogEntry.css'
 import { useBlogDetailStore } from '../../store'
