@@ -17,4 +17,5 @@ test('mock data flag executes random data generation', async () => {
   const result = getData()
   const flagEntry = result?.find(x => x.previewText === 'RDR2 is the best')
   expect(flagEntry).toBeTruthy()
+  expect(result?.length).toBeGreaterThan(1)
 })
