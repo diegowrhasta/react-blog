@@ -1,8 +1,8 @@
 import { getData } from 'src/data'
-import { getConfig } from '../../services/config.service'
+import { getConfig } from '../../services'
 
 beforeEach(() => {
-  vi.mock('../../services/config.service', () => ({
+  vi.mock('../../services', () => ({
     getConfig: vi.fn()
   }))
 })
