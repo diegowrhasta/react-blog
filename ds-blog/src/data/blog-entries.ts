@@ -112,4 +112,21 @@ function getBlogEntry (id: string) {
   return getData()?.find(x => x.id === id)
 }
 
-export { getData, LABEL_ENTRIES, DUMMY_ENTRY, getBlogEntry, createRandomEntry }
+function updateBlogEntry (id: string, key: string, value: unknown) {
+  const entryIndex = getData()?.findIndex(x => x.id === id)
+
+  if (entryIndex == null || entryIndex === -1) {
+    return
+  }
+
+  _data![entryIndex] = { ..._data![entryIndex], [key]: value }
+}
+
+export {
+  getData,
+  updateBlogEntry,
+  LABEL_ENTRIES,
+  DUMMY_ENTRY,
+  getBlogEntry,
+  createRandomEntry
+}

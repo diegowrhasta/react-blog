@@ -1,8 +1,9 @@
 import { render, screen, within } from 'testing-library-utils'
 
 import { BlogEntryDetail } from '../BlogEntryDetail'
+import { updateBlogEntry } from 'src/data'
 
-beforeAll(() => {
+beforeEach(() => {
   vi.stubGlobal('scrollTo', () => {}) // Raises warning since window.scrollTo is not available
 })
 
@@ -23,4 +24,18 @@ test('loading state and update work correctly', async () => {
   )
   expect(tagsSection).toBeInTheDocument()
   expect(tagElements).toHaveLength(2)
+})
+
+test('no labels are coalesced correctly', async () => {
+  const testId = '70e2c51a-f70f-4df5-9cb8-bc4b88260888'
+  updateBlogEntry(testId, 'labels', undefined)
+
+  render(<BlogEntryDetail entryId={testId} />)
+
+  const tagsSection = await screen.findByLabelText(/Tags/i)
+  const tagElements = within(tagsSection).queryAllByText(
+    (_, element) => element?.tagName === 'SPAN'
+  )
+  expect(tagsSection).toBeInTheDocument()
+  expect(tagElements).toHaveLength(0)
 })

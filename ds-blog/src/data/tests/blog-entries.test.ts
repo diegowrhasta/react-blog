@@ -1,4 +1,4 @@
-import { getData } from 'src/data'
+import { getData, updateBlogEntry } from 'src/data'
 import { getConfig } from '../../services'
 
 beforeEach(() => {
@@ -18,4 +18,9 @@ test('mock data flag executes random data generation', async () => {
   const flagEntry = result?.find(x => x.previewText === 'RDR2 is the best')
   expect(flagEntry).toBeTruthy()
   expect(result?.length).toBeGreaterThan(1)
+})
+
+test("faulty update doesn't throw exception", () => {
+  const action = () => updateBlogEntry('asdf', 'tags', [])
+  expect(action).not.toThrow()
 })
