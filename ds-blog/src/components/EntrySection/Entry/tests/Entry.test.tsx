@@ -1,4 +1,4 @@
-import { render, screen } from 'testing-library-utils'
+import { render, screen, within } from 'testing-library-utils'
 import userEvent from '@testing-library/user-event'
 import { Entry } from '../Entry'
 import { createRandomEntry, DUMMY_ENTRY, EntryInterface } from 'src/data'
@@ -37,6 +37,13 @@ test('entry is navigable and accesible', async () => {
   useBlogDetailStore.getState().reset()
   await user.click(entry)
   expect(useBlogDetailStore.getState().routing).toBeTruthy()
+
+  const tagsSection = screen.getByLabelText(/Tags/i)
+  const tagElements = within(tagsSection).getAllByText(
+    (_, element) => element?.tagName === 'SPAN'
+  )
+  expect(tagsSection).toBeInTheDocument()
+  expect(tagElements).not.toHaveLength(0)
 })
 
 test('skeleton entry is not focusable nor actionable', async () => {

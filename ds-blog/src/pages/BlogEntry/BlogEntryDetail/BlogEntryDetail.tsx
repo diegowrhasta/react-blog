@@ -30,7 +30,7 @@ function BlogEntryDetail ({ entryId }: BlogEntryDetailProps) {
 
     setIsLoading(true)
     const { date, labels } = getBlogEntry(entryId)!
-    setTags(labels)
+    setTags(labels ?? [])
 
     fetch(`/blogs/${date.getFullYear()}/${date.getMonth() + 1}/${entryId}.html`)
       .then(async response => {
@@ -100,7 +100,7 @@ function BlogEntryDetail ({ entryId }: BlogEntryDetailProps) {
     return cleanup
   }, [articleRef, entryContent, setIsLoading])
 
-  const tagElements = (tags ?? []).map((entry, index) => {
+  const tagElements = tags.map((entry, index) => {
     return <Tag key={`${index}-tag`} label={entry} />
   })
 
@@ -123,7 +123,9 @@ function BlogEntryDetail ({ entryId }: BlogEntryDetailProps) {
             ref={articleRef}
             dangerouslySetInnerHTML={{ __html: entryContent }}
           ></article>
-          <span className='labels'>{tagElements}</span>
+          <div aria-label='Tags' className='labels'>
+            {tagElements}
+          </div>
         </div>
       )}
     </>

@@ -1,4 +1,4 @@
-import { render, screen } from 'testing-library-utils'
+import { render, screen, within } from 'testing-library-utils'
 
 import { BlogEntryDetail } from '../BlogEntryDetail'
 
@@ -16,4 +16,11 @@ test('loading state and update work correctly', async () => {
     name: /Software, Pragmatism and Epistemology/i // Replace with expected updated content
   })
   expect(updatedContent).toBeInTheDocument()
+
+  const tagsSection = screen.getByLabelText(/Tags/i)
+  const tagElements = within(tagsSection).getAllByText(
+    (_, element) => element?.tagName === 'SPAN'
+  )
+  expect(tagsSection).toBeInTheDocument()
+  expect(tagElements).toHaveLength(2)
 })

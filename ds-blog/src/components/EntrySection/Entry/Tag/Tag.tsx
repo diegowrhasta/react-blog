@@ -10,8 +10,8 @@ export function Tag ({ label }: TagProps) {
   const colorStyle = label.type.toLowerCase()
 
   return (
-    <div key={label.id} className={`tag ${colorStyle}`}>
+    <span key={label.id} className={`tag ${colorStyle}`}>
       {label.label}
-    </div>
+    </span>
   )
 }

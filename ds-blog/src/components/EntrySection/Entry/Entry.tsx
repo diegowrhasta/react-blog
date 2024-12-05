@@ -90,7 +90,9 @@ function getEntryType (
             {title}
           </h2>
           <div className='text-preview'>{previewText}</div>
-          <span className='labels'>{tags}</span>
+          <div aria-label='Tags' className='labels'>
+            {tags}
+          </div>
         </>
       )
     case 'small-picture-left':
@@ -111,7 +113,9 @@ function getEntryType (
             )}`}</label>
             <h2 className='title'>{title}</h2>
             <div className='text-preview'>{previewText}</div>
-            <span className='labels'>{tags}</span>
+            <div aria-label='Tags' className='labels'>
+              {tags}
+            </div>
           </section>
         </>
       )
@@ -135,7 +139,9 @@ function getEntryType (
               {title}
             </h2>
             <div className='text-preview'>{previewText}</div>
-            <span className='labels'>{tags}</span>
+            <div aria-label='Tags' className='labels'>
+              {tags}
+            </div>
           </section>
         </>
       )
@@ -158,7 +164,9 @@ function getEntryType (
             {title}
           </h2>
           <div className='text-preview'>{previewText}</div>
-          <span className='labels'>{tags}</span>
+          <div aria-label='Tags' className='labels'>
+            {tags}
+          </div>
         </>
       )
     default:
@@ -180,7 +188,9 @@ function getEntryType (
             {title}
           </h2>
           <div className='text-preview'>{previewText}</div>
-          <span className='labels'>{tags}</span>
+          <div aria-label='Tags' className='labels'>
+            {tags}
+          </div>
         </>
       )
   }

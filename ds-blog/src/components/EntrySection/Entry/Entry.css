@@ -53,7 +53,7 @@ article.entry {
       border-radius: 4px;
     }
 
-    span.labels {
+    div.labels {
       background-color: #e0e0e0;
       border-radius: 4px;
     }
@@ -142,7 +142,7 @@ article.entry {
     color: var(--light-text);
   }
 
-  span.labels {
+  div.labels {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

@@ -50,7 +50,7 @@ div.detail-container {
     }
   }
 
-  span {
+  div {
     &.labels {
       display: flex;
       flex-direction: row;
