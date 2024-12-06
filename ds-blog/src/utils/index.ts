@@ -1,3 +1,5 @@
 export * from './entries'
 export * from './date'
 export * from './scroll'
+export * from './input-events'
+export * from './images'

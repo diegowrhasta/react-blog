@@ -6,7 +6,7 @@ import './Entry.css'
 import { type ENTRY_TYPES } from '../../../constants'
 import { useBlogDetailStore } from '../../../store'
 import { useNavigate } from 'react-router-dom'
-import { onInteractiveKeyDown } from 'src/utils/input-events'
+import { onInteractiveKeyDown } from 'src/utils'
 
 interface EntryProps extends EntryInterface {
   type?: EntryTypes | undefined
