@@ -112,6 +112,18 @@ function getBlogEntry (id: string) {
   return getData()?.find(x => x.id === id)
 }
 
+/**
+ * Resets modules state (used specifically for tests)
+ *
+ * @example
+ * beforeEach(() => {
+ *   resetData()
+ * })
+ */
+function resetData () {
+  _data = undefined
+}
+
 function updateBlogEntry (id: string, key: string, value: unknown) {
   const entryIndex = getData()?.findIndex(x => x.id === id)
 
@@ -128,5 +140,6 @@ export {
   LABEL_ENTRIES,
   DUMMY_ENTRY,
   getBlogEntry,
-  createRandomEntry
+  createRandomEntry,
+  resetData
 }

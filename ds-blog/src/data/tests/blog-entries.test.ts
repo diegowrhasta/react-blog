@@ -1,4 +1,4 @@
-import { getData, updateBlogEntry } from 'src/data'
+import { getData, resetData, updateBlogEntry } from 'src/data'
 import { getConfig } from '../../services'
 
 beforeEach(() => {
@@ -12,6 +12,7 @@ afterEach(() => {
 })
 
 test('mock data flag executes random data generation', async () => {
+  resetData()
   vi.mocked(getConfig).mockReturnValue({ mockMode: true, initialized: true })
 
   const result = getData()
